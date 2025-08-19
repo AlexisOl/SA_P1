@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class casoUsoCrearPersona implements creacionPersonaInputPort {
+public class CasoUsoCrearPersona implements creacionPersonaInputPort {
 
     private final creacionPersonaOutputPersistenciaPuerto personaOutputPersistenciaPuerto;
 

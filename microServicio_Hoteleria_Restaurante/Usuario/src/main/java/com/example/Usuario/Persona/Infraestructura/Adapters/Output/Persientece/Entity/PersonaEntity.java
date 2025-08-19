@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class PersonaEntity {
     @Id
     @Column(name = "cui", nullable = false, unique = true, length = 20)
-    private String cui;
+    private Long cui;
     private String nombre;
     private LocalDate fechaNacimiento;
     private String direccion;

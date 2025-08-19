@@ -18,5 +18,5 @@ public class crearUsuarioDTO {
     @NotNull
     private String password;
     @NotNull
-    private Persona persona;
+    private Long cui;
 }
