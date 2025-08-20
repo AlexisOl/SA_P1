@@ -10,8 +10,9 @@
 	<groupId>com.example</groupId>
 	<artifactId>microServicio_Hoteleria_Restaurante</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>microServicio_Hoteleria_Restaurante</name>
-	<description>Demo project for Spring Boot</description>
+	<description>PROYECTO GENERAL</description>
 	<packaging>pom</packaging>
 	<url/>
 	<licenses>

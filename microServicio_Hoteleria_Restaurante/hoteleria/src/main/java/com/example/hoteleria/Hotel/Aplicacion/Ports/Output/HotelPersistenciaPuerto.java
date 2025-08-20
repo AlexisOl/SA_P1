@@ -1,6 +1,7 @@
 package com.example.hoteleria.Hotel.Aplicacion.Ports.Output;
 
 import com.example.hoteleria.Hotel.Dominio.Models.Hotel;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,5 +14,6 @@ public interface HotelPersistenciaPuerto {
     Hotel save(Hotel hotel);
 
 
-
+    @Transactional(readOnly = true)
+    Optional<Hotel> buscarHotelId(Long idHotel);
 }
