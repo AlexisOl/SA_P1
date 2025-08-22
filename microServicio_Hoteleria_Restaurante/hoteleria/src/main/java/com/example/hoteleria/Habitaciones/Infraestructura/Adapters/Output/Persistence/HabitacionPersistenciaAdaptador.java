@@ -7,6 +7,7 @@ import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence.Mapper.HabitacionMapper;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence.Repository.HabitacionRepository;
 import com.example.hoteleria.Hotel.Infraestructura.Adapters.Output.Persistence.HotelPersistenciaAdaptador;
+import com.example.hoteleria.Hotel.Infraestructura.Adapters.Output.Persistence.Repository.HotelRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutputPortPersistence {
 
     private final HabitacionRepository habitacionRepository;
+    private final HotelRepository hotelRepository;
     private final HabitacionMapper habitacionMapper;
 
 

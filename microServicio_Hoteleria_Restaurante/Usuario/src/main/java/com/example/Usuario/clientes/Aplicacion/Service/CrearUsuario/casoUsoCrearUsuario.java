@@ -2,6 +2,7 @@ package com.example.Usuario.clientes.Aplicacion.Service.CrearUsuario;
 
 
 import com.example.Usuario.Persona.Dominio.Persona;
+import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Entity.PersonaEntity;
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Mapper.PersonaPersistenceMapper;
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.PersonaPersistenceAdapter;
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Repository.PersonaRepository;
@@ -21,25 +22,29 @@ public class casoUsoCrearUsuario implements CreacionUsuarioInputPort {
 
 
     private final CreacionUsuarioOutputPersitencePort creacionUsuarioOutputPersitencePort;
-    private final PersonaPersistenceAdapter personaPersistenceAdapter;
+    private final PersonaRepository personaRepository;
     private final PersonaPersistenceMapper personaPersistenceMapper;
 
     @Override
     @Transactional
     public Usuario crearUsuario(crearUsuarioDTO usuarioDTO) {
         //busqueda de persona
-        Optional<Persona> nuevoPersonaOpt = (personaPersistenceAdapter.buscarPersona(usuarioDTO.getCui()));
+       // Optional<Persona> nuevoPersonaOpt = (personaPersistenceAdapter.buscarPersona(usuarioDTO.getCui()));
+        Persona nuevaPersona = new Persona(
+                usuarioDTO.getCui(),
+                usuarioDTO.getNombre(),
+                usuarioDTO.getFechaNacimiento(),
+                usuarioDTO.getDireccion(),
+                usuarioDTO.getTelefono(),
+                usuarioDTO.getCorreo()
+        );
 
-        if (nuevoPersonaOpt.isPresent()) {
-            Persona nuevoPersona = nuevoPersonaOpt.get();
+       // PersonaEntity persona = personaRepository.save(personaPersistenceMapper.toPersonaEntity(nuevaPersona));
             Usuario nuevoUsuario = creacionUsuarioOutputPersitencePort.crearUsuario(
                     new Usuario(UUID.randomUUID(),
                             usuarioDTO.getUsername(),
                             usuarioDTO.getPassword(),
-                            nuevoPersona)
-            );
+                            personaPersistenceMapper.toPersona(personaPersistenceMapper.toPersonaEntity(nuevaPersona))));
             return nuevoUsuario;
         }
-        return null;
     }
-}

@@ -1,5 +1,6 @@
 package com.example.Usuario.clientes.infraestructura.Adapters.Output.Persistence;
 
+import com.example.Usuario.Persona.Dominio.Persona;
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Mapper.PersonaPersistenceMapper;
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Repository.PersonaRepository;
 import com.example.Usuario.clientes.Aplicacion.Ports.Input.CreacionUsuarioInputPort;
@@ -17,12 +18,18 @@ import org.springframework.stereotype.Component;
 public class UsuarioPersistenceAdapter implements CreacionUsuarioOutputPersitencePort {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioPersistenceMapper usuarioPersistenceMapper;
+    private final PersonaPersistenceMapper personaPersistenceMapper;
+    private final PersonaRepository personaRepository;
 
 
 
     @Override
     @Transactional
     public Usuario crearUsuario(Usuario usuario) {
+
+        Persona nuevaPersona = personaPersistenceMapper.toPersona(
+                this.personaRepository.save(personaPersistenceMapper.toPersonaEntity(usuario.getPersona())));
+
         return usuarioPersistenceMapper.toPUssuario(
                 usuarioRepository.save(
                         usuarioPersistenceMapper.toUsuarioEntity(usuario)
