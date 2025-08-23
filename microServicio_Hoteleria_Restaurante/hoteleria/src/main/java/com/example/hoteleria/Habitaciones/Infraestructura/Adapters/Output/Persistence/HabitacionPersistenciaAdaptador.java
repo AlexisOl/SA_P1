@@ -2,6 +2,7 @@ package com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persi
 
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.CrearHabitacionDTO;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.CreacionHabitacionOutputPortPersistence;
+import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.ListarHaitacionesOutputPersistence;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.CreacionHabitacionInputPort;
 import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence.Mapper.HabitacionMapper;
@@ -12,9 +13,11 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @AllArgsConstructor
-public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutputPortPersistence {
+public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutputPortPersistence, ListarHaitacionesOutputPersistence {
 
     private final HabitacionRepository habitacionRepository;
     private final HotelRepository hotelRepository;
@@ -30,5 +33,10 @@ public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutput
                 habitacionRepository.save(
                         habitacionMapper.toHabitacionEntity((habitacion)))
         );
+    }
+
+    @Override
+    public List<Habitacion> listarHabitaciones(Long id_hotel) {
+        return habitacionMapper.toHabitacionList(this.habitacionRepository.findAllByHotel_Id(id_hotel)) ;
     }
 }
