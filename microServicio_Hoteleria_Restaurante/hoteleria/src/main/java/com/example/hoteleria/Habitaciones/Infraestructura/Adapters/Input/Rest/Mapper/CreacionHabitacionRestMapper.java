@@ -3,6 +3,7 @@ package com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.M
 import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Request.ListarHabitacionesRequestDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Request.crearHabitacionRequestDTO;
+import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.BuscarHabitacionResponseDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.CrearHabitacionResponseDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.ListarHabitacionesResponseDTO;
 import org.mapstruct.Mapper;
@@ -21,4 +22,8 @@ public interface CreacionHabitacionRestMapper {
     List<Habitacion> toHabitacionLista(List<ListarHabitacionesRequestDTO> habitacionesRequestDTO);
 
     List<ListarHabitacionesResponseDTO> toHabitacionesListaResponse(List<Habitacion> habitacion);
+
+    Habitacion toHabitacion(BuscarHabitacionResponseDTO habitacion);
+
+    BuscarHabitacionResponseDTO toBuscarHabitacionResponse(Habitacion habitacion);
 }

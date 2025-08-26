@@ -1,6 +1,8 @@
 package com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence;
 
+import com.example.hoteleria.Habitaciones.Aplicacion.Service.BuscarHabitacionId.CasoUsoBuscarHabitacionId;
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.CrearHabitacionDTO;
+import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.BuscarHabitacionOutputPort;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.CreacionHabitacionOutputPortPersistence;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.ListarHaitacionesOutputPersistence;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.CreacionHabitacionInputPort;
@@ -14,10 +16,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @AllArgsConstructor
-public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutputPortPersistence, ListarHaitacionesOutputPersistence {
+public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutputPortPersistence, ListarHaitacionesOutputPersistence ,
+        BuscarHabitacionOutputPort {
 
     private final HabitacionRepository habitacionRepository;
     private final HotelRepository hotelRepository;
@@ -38,5 +42,13 @@ public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutput
     @Override
     public List<Habitacion> listarHabitaciones(Long id_hotel) {
         return habitacionMapper.toHabitacionList(this.habitacionRepository.findAllByHotel_Id(id_hotel)) ;
+    }
+
+    @Override
+    @Transactional
+    public Habitacion buscarHabitacion(UUID id_habitacion) {
+        return habitacionRepository.findById(id_habitacion)
+                .map(habitacionMapper::toHabitacion)
+                .orElse(null);
     }
 }

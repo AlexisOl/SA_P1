@@ -2,9 +2,11 @@ package com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest;
 
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.CrearHabitacionDTO;
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.ListarHabitaciones.ListarHabitacionesPorHotelDTO;
+import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.BuscarHabitacionInputPort;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.CreacionHabitacionInputPort;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.ListarHabitacionesInputPort;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Mapper.CreacionHabitacionRestMapper;
+import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.BuscarHabitacionResponseDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.CrearHabitacionResponseDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.ListarHabitacionesResponseDTO;
 import com.example.hoteleria.Hotel.Infraestructura.Adapters.Input.Rest.Model.Response.HotelResponse;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -23,6 +26,7 @@ import java.util.List;
 public class HabitacionesRestAdapter {
     private final CreacionHabitacionInputPort creacionHabitacionInputPort;
     private final ListarHabitacionesInputPort listarHabitacionesInputPort;
+    private final BuscarHabitacionInputPort buscarHabitacionInputPort;
     private final CreacionHabitacionRestMapper creacionHabitacionRestMapper;
 
     @GetMapping("{hotel_id}")
@@ -39,5 +43,11 @@ public class HabitacionesRestAdapter {
                 .body(this.creacionHabitacionRestMapper.toHabitacionResponse(
                         creacionHabitacionInputPort.crearHabitacion((crearHabitacionDTO))
                 ));
+    }
+
+
+    @GetMapping("/habitacion/{habitacion_id}")
+    public BuscarHabitacionResponseDTO obtenerHabitacion(@Valid @PathVariable UUID habitacion_id) {
+        return  this.creacionHabitacionRestMapper.toBuscarHabitacionResponse(this.buscarHabitacionInputPort.buscarHabitacion(habitacion_id));
     }
 }

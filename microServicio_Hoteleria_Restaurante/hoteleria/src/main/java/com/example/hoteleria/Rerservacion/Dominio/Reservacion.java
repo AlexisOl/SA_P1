@@ -10,13 +10,22 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@Builder
 public class Reservacion {
     private UUID id;
     private LocalDate fechaEntrada;
     private LocalDate fechaSalida;
     private Habitacion habitacion;
+    private TipoReservacion tipoReservacion;
     private UUID id_usuario;
+
+    public Reservacion(UUID id, LocalDate fechaEntrada, LocalDate fechaSalida, Habitacion habitacion, UUID id_usuario, TipoReservacion tipoReservacion) {
+        this.id = id;
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+        this.habitacion = habitacion;
+        this.id_usuario = id_usuario;
+        this.tipoReservacion = tipoReservacion;
+    }
 
 
     // validaciones
