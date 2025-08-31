@@ -5,6 +5,7 @@ import com.example.hoteleria.Habitaciones.Aplicacion.Service.ListarHabitaciones.
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.BuscarHabitacionInputPort;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.CreacionHabitacionInputPort;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.ListarHabitacionesInputPort;
+import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Mapper.CreacionHabitacionRestMapper;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.BuscarHabitacionResponseDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.CrearHabitacionResponseDTO;
@@ -48,6 +49,8 @@ public class HabitacionesRestAdapter {
 
     @GetMapping("/habitacion/{habitacion_id}")
     public BuscarHabitacionResponseDTO obtenerHabitacion(@Valid @PathVariable UUID habitacion_id) {
+        Habitacion prueba = this.buscarHabitacionInputPort.buscarHabitacion(habitacion_id);
+        System.out.println(prueba.getId()+" - "+prueba.getPrecio()+ "-- "+ prueba.getTipoHabitacion());
         return  this.creacionHabitacionRestMapper.toBuscarHabitacionResponse(this.buscarHabitacionInputPort.buscarHabitacion(habitacion_id));
     }
 }

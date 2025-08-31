@@ -1,5 +1,6 @@
 package com.example.facturacion.DetalleFactura_Hotel.Dominio;
 
+import com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor.precioPorFacturaHotel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +16,12 @@ public class DetalleFactura_Hotel {
 
     private UUID id_reservacion;
 
-    public DetalleFactura_Hotel(UUID id, LocalDate fecha, UUID id_reservacion) {
+    private precioPorFacturaHotel precio;
+
+    public DetalleFactura_Hotel(UUID id, LocalDate fecha, UUID id_reservacion, precioPorFacturaHotel precio) {
         this.id = id;
         this.fecha = fecha;
         this.id_reservacion = id_reservacion;
+        this.precio = precio;
     }
 }

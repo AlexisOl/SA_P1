@@ -17,6 +17,8 @@ public class GenerarFacturaDTO {
     private LocalDate fecha;
     @NotNull
     private UUID id_reservacion;
+    @NotNull
+    private double precio;
 
 
 }

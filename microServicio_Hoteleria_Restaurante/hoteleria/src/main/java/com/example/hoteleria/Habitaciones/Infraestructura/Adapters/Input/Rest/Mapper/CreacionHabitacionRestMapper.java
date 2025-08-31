@@ -7,6 +7,7 @@ import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Mo
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.CrearHabitacionResponseDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.ListarHabitacionesResponseDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public interface CreacionHabitacionRestMapper {
     List<ListarHabitacionesResponseDTO> toHabitacionesListaResponse(List<Habitacion> habitacion);
 
     Habitacion toHabitacion(BuscarHabitacionResponseDTO habitacion);
-
+    @Mapping(source = "tipoHabitacion", target = "tipoHabitacion")
+    @Mapping(source = "precio", target = "precio")
     BuscarHabitacionResponseDTO toBuscarHabitacionResponse(Habitacion habitacion);
 }

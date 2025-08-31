@@ -1,6 +1,7 @@
 package com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Output;
 
 import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.GenerarFacturaDetalladaOutputPort;
+import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.ListarFacturasDetalladasOutputPort;
 import com.example.facturacion.DetalleFactura_Hotel.Dominio.DetalleFactura_Hotel;
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Output.Mapper.DetalleFacturaMapper;
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Output.Repository.DetalleFacturaRepository;
@@ -8,10 +9,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Component
 @AllArgsConstructor
-public class DetalleFacturaPersitenciaAdapatador implements GenerarFacturaDetalladaOutputPort {
+public class DetalleFacturaPersitenciaAdapatador implements GenerarFacturaDetalladaOutputPort, ListarFacturasDetalladasOutputPort {
 
     private final DetalleFacturaRepository detalleFacturaRepository;
     private final DetalleFacturaMapper detalleFacturaMapper;
@@ -24,5 +27,10 @@ public class DetalleFacturaPersitenciaAdapatador implements GenerarFacturaDetall
                         this.detalleFacturaMapper.toDetalleFacturaEntity(detalleFactura_Hotel)
                 )
         );
+    }
+
+    @Override
+    public List<DetalleFactura_Hotel> listarFacturas() {
+        return this.detalleFacturaMapper.toListDetalleFactura_Hotel(this.detalleFacturaRepository.findAll());
     }
 }

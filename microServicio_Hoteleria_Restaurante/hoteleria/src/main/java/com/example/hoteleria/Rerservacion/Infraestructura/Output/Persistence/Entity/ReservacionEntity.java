@@ -30,10 +30,8 @@ public class ReservacionEntity {
     @JoinColumn(name = "id_habitacion", nullable = false)
     private HabitacionEntity habitacion;
 
-
-
     @Enumerated(EnumType.STRING)
     private TipoReservacion tipoReservacion;
-    @Column(name = "id_usuario", nullable = false)
-    private UUID id_usuario;
+    @Column(name = "idusuario", nullable = false)
+    private UUID idusuario;
 }

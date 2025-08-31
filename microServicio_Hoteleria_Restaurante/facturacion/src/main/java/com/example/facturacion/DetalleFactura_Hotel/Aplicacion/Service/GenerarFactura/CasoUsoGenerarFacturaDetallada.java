@@ -34,7 +34,8 @@ public class CasoUsoGenerarFacturaDetallada implements GenerarFacturaDetalladaIn
                     new DetalleFactura_Hotel(
                             UUID.randomUUID(),
                             detalleFactura_Hotel.getFecha(),
-                            detalleFactura_Hotel.getId_reservacion()
+                            detalleFactura_Hotel.getId_reservacion(),
+                            detalleFactura_Hotel.getPrecio()
                             )
             );
         }

@@ -5,6 +5,7 @@ import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.Cre
 import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence.Entity.HabitacionEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -12,6 +13,9 @@ import java.util.List;
 
 public interface HabitacionMapper {
 
+
+    @Mapping(source = "tipoHabitacion", target = "tipoHabitacion")
+    @Mapping(source = "precio", target = "precio")
     Habitacion toHabitacion(HabitacionEntity habitacionEntity);
     HabitacionEntity toHabitacionEntity(Habitacion habitacion);
     HabitacionEntity toHabitacionEntity(CrearHabitacionDTO crearHabitacionDTO);

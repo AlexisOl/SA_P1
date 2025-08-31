@@ -5,6 +5,8 @@ import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.Cre
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.CrearHabitacionResponseDTO;
 import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.CrearReservacionInputPort;
 import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.ExistenciaReservaHabitacionesEnEsperaInputPort;
+import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.ListarReservacionEspecificaInput;
+import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.ListarReservacionesUsuarioInputPort;
 import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.CrearReservacionOutputPort;
 import com.example.hoteleria.Rerservacion.Aplicacion.Service.CasosUso.CrearReservacion.CrearReservacionDTO;
 import com.example.hoteleria.Rerservacion.Dominio.TipoReservacion;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,7 +29,9 @@ public class ReservacionRestAdapter {
 
     private final CrearReservacionInputPort crearReservacionInputPort;
     private final ExistenciaReservaHabitacionesEnEsperaInputPort existenciaHabitacionesEnEsperaId;
+    private final ListarReservacionesUsuarioInputPort listarReservacionesUsuarioInputPort;
     private final CreacionReservacionMapperRest   creacionReservacionMapperRest;
+    private final ListarReservacionEspecificaInput listarReservacionEspecificaInput;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -45,6 +50,14 @@ public class ReservacionRestAdapter {
         return ResponseEntity.ok(existe);
     }
 
+    @GetMapping("/clientes/{id}")
+    public List<ReservacionResponseDTO> listadoReservacionesPorCliente(@PathVariable UUID id) {
+        return this.creacionReservacionMapperRest.toListReservacionResponseDTO(this.listarReservacionesUsuarioInputPort.listarReservacionesUsuario(id)) ;
+    }
 
+    @GetMapping("/{id}")
+    public ReservacionResponseDTO listarReservacionEspecifica(@PathVariable UUID id) {
+        return this.creacionReservacionMapperRest.toReservacionResponseDTO(this.listarReservacionEspecificaInput.ListarReservacionEspecifica(id)) ;
+    }
 
 }

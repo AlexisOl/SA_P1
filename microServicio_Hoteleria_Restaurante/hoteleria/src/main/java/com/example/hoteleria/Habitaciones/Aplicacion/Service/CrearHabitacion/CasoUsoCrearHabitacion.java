@@ -29,7 +29,9 @@ public class CasoUsoCrearHabitacion implements CreacionHabitacionInputPort {
                         UUID.randomUUID(),
                         crearHabitacionDTO.getNumero_habitacion(),
                         crearHabitacionDTO.getCantidad_camas(),
-                        hotelEncontrado
+                        hotelEncontrado,
+                        crearHabitacionDTO.getTipoHabitacion(),
+                        crearHabitacionDTO.getPrecio()
         ));
 
 

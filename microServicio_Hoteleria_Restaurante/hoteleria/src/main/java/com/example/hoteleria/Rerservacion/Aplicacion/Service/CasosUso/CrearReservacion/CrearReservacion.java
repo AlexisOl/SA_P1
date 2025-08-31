@@ -23,13 +23,15 @@ public class CrearReservacion implements CrearReservacionInputPort {
 
         Habitacion habitacionEncontrada = this.habitacionPersistenciaAdaptador.buscarHabitacion(crearReservacionDTO.getHabitacion());
 
+
+        System.out.println(crearReservacionDTO);
         Reservacion nuevaReservacion= this.crearReservacionOutputPort.crearReservacion(
                 new Reservacion(
                 UUID.randomUUID(),
                 crearReservacionDTO.getFechaEntrada(),
                 crearReservacionDTO.getFechaSalida(),
                 habitacionEncontrada,
-                UUID.randomUUID(),
+                crearReservacionDTO.getIdusuario(),
                         crearReservacionDTO.getTipoReservacion()
                 )
         );

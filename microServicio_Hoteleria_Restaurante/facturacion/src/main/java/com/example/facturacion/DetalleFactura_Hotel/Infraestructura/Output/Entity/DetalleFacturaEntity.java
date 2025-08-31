@@ -24,4 +24,6 @@ public class DetalleFacturaEntity {
     private LocalDate fecha;
     @Column(name = "id_reservacion", nullable = false)
     private UUID id_reservacion;
+    @Column(nullable = false)
+    private double precio;
 }

@@ -1,6 +1,7 @@
 package com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence.Entity;
 
 
+import com.example.hoteleria.Habitaciones.Dominio.Model.TipoHabitacion;
 import com.example.hoteleria.Hotel.Infraestructura.Adapters.Output.Persistence.Entity.HotelEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,13 @@ public class HabitacionEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_hotel", nullable = false)
     private HotelEntity hotel;
+
+    @Enumerated(EnumType.STRING)
+    private TipoHabitacion tipoHabitacion;
+    @Column(nullable = false)
+    private Double precio;
+
+
 
 
 }

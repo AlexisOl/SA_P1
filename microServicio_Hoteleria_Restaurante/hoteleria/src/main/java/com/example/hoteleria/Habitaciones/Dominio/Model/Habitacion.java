@@ -16,7 +16,6 @@ public class Habitacion {
     private Long numero_habitacion;
     private Long cantidad_camas;
     private Hotel hotel;
-
-    // private TipoHabitacion tipoHabitacion
-
+    private TipoHabitacion tipoHabitacion;
+    private Double precio;
 }
