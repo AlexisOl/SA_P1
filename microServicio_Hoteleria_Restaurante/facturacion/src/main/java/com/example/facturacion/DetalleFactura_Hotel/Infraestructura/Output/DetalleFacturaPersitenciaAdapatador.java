@@ -8,7 +8,6 @@ import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Output.Repos
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 
@@ -21,7 +20,8 @@ public class DetalleFacturaPersitenciaAdapatador implements GenerarFacturaDetall
     @Override
     @Transactional
     public DetalleFactura_Hotel GenerarFacturaDetallada(DetalleFactura_Hotel detalleFactura_Hotel) {
-        System.out.println(detalleFactura_Hotel.getId()+" --- " + detalleFactura_Hotel.getFecha()+" --- " + detalleFactura_Hotel.getId_reservacion());
+        System.out.println(detalleFactura_Hotel.getPrecio().getPrecio()+" --- " + detalleFactura_Hotel.getFecha()+" --- " + detalleFactura_Hotel.getId_reservacion());
+        System.out.println(this.detalleFacturaMapper.toDetalleFacturaEntity(detalleFactura_Hotel));
         return this.detalleFacturaMapper.toDetalleFactura_Hotel(
                 this.detalleFacturaRepository.save(
                         this.detalleFacturaMapper.toDetalleFacturaEntity(detalleFactura_Hotel)
@@ -30,6 +30,7 @@ public class DetalleFacturaPersitenciaAdapatador implements GenerarFacturaDetall
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<DetalleFactura_Hotel> listarFacturas() {
         return this.detalleFacturaMapper.toListDetalleFactura_Hotel(this.detalleFacturaRepository.findAll());
     }

@@ -12,10 +12,12 @@ public interface DetalleFacturaMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "fecha", target = "fecha")
     @Mapping(source = "id_reservacion", target = "id_reservacion")
+    @Mapping(source = "precio.precio", target = "precio")
     DetalleFacturaEntity toDetalleFacturaEntity (DetalleFactura_Hotel detalleFactura_Hotel);
     @Mapping(source = "id", target = "id")
     @Mapping(source = "fecha", target = "fecha")
     @Mapping(source = "id_reservacion", target = "id_reservacion")
+    @Mapping(target = "precio", expression = "java(new com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor.precioPorFacturaHotel(detalleFacturaEntity.getPrecio()))")
     DetalleFactura_Hotel toDetalleFactura_Hotel (DetalleFacturaEntity detalleFacturaEntity);
 
 

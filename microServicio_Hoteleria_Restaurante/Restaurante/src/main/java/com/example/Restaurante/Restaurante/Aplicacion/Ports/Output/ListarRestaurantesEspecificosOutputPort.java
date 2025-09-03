@@ -2,7 +2,9 @@ package com.example.Restaurante.Restaurante.Aplicacion.Ports.Output;
 
 import com.example.Restaurante.Restaurante.Dominio.Restaurante;
 
-public interface CreacionRestauranteOutputPort {
+import java.util.UUID;
 
-    Restaurante crearRestaurante(Restaurante restaurante);
+public interface ListarRestaurantesEspecificosOutputPort {
+    Restaurante listarRestaurantesEspecifico(UUID id);
+
 }
