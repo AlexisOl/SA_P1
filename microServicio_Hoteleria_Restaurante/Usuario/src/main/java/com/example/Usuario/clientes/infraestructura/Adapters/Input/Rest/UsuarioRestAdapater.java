@@ -5,7 +5,9 @@ import com.example.Usuario.Persona.Aplicacion.Service.CrearPersona.crearPersonaD
 import com.example.Usuario.Persona.Infraestructura.Adapters.Input.Rest.Mapper.CreacionRestPersonaMapper;
 import com.example.Usuario.Persona.Infraestructura.Adapters.Input.Rest.Model.Response.PersonaResponse;
 import com.example.Usuario.clientes.Aplicacion.Ports.Input.CreacionUsuarioInputPort;
+import com.example.Usuario.clientes.Aplicacion.Ports.Input.LoginInputPort;
 import com.example.Usuario.clientes.Aplicacion.Service.CrearUsuario.crearUsuarioDTO;
+import com.example.Usuario.clientes.Aplicacion.Service.LoginUsuario.LoginUsuarioDTO;
 import com.example.Usuario.clientes.infraestructura.Adapters.Input.Rest.Mapper.CreacionUsuarioRestMapper;
 import com.example.Usuario.clientes.infraestructura.Adapters.Input.Rest.Model.Response.UsuarioResponse;
 import jakarta.validation.Valid;
@@ -21,6 +23,7 @@ public class UsuarioRestAdapater {
 
     private final CreacionUsuarioRestMapper creacionUsuarioRestMapper;
     private final CreacionUsuarioInputPort creacionUsuarioInputPort;
+    private final LoginInputPort loginInputPort;
 
 
     @PostMapping()
@@ -32,4 +35,12 @@ public class UsuarioRestAdapater {
                 ));
     }
 
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginUsuarioDTO loginDTO) {
+        String response = (
+                loginInputPort.login(loginDTO)
+        );
+        return ResponseEntity.ok(response);
+    }
 }

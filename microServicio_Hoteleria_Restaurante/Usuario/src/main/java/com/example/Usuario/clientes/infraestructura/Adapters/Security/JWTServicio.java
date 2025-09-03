@@ -1,14 +1,15 @@
-package com.example.Usuario.Auth.Infraestructura.Security;
+package com.example.Usuario.clientes.infraestructura.Adapters.Security;
 
 import com.example.Usuario.clientes.Dominio.Model.Usuario;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import io.jsonwebtoken.Claims;
-import org.springframework.beans.factory.annotation.Value;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,9 +18,9 @@ import java.util.function.Function;
 
 @Service
 public class JWTServicio {
-    @Value("${security.jwt.secret-key}")
+    @Value("${spring.security.jwt.secret-key}")
     private String llave;
-    @Value("${security.jwt.secret-expiration-time}")
+    @Value("${spring.security.jwt.secret-expiration-time}")
     private long jwtExpiracion;
 
 

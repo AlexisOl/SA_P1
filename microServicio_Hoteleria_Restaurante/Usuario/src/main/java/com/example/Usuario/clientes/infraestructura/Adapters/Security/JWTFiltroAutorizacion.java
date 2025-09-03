@@ -1,4 +1,4 @@
-package com.example.Usuario.Auth.Infraestructura.Security;
+package com.example.Usuario.clientes.infraestructura.Adapters.Security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,14 +24,14 @@ public class JWTFiltroAutorizacion extends OncePerRequestFilter {
     @Autowired
     private JWTServicio jwtServicio;
     private HandlerExceptionResolver handlerExceptionResolver;
-    private UserDetailsService userDetailsService;
+    private final UsuarioDetailsService userDetailsService;
 
 
     //constructor
 
     public JWTFiltroAutorizacion(
             JWTServicio jwtServicio,
-            UserDetailsService userDetailsService,
+            UsuarioDetailsService userDetailsService,
             HandlerExceptionResolver handlerExceptionResolver
     ) {
         this.jwtServicio = jwtServicio;

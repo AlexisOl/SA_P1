@@ -1,4 +1,4 @@
-package com.example.Usuario.Auth.Aplicacion.CasoUso.Login;
+package com.example.Usuario.clientes.Aplicacion.Service.LoginUsuario;
 
 import lombok.Value;
 
@@ -6,4 +6,5 @@ import lombok.Value;
 public class LoginUsuarioDTO {
     private String username;
     private String password;
+
 }

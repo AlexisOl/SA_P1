@@ -1,4 +1,4 @@
-package com.example.Usuario.Auth.Infraestructura.Security;
+package com.example.Usuario.clientes.infraestructura.Adapters.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -5,21 +5,26 @@ import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.M
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Repository.PersonaRepository;
 import com.example.Usuario.clientes.Aplicacion.Ports.Input.CreacionUsuarioInputPort;
 import com.example.Usuario.clientes.Aplicacion.Ports.Output.CreacionUsuarioOutputPersitencePort;
+import com.example.Usuario.clientes.Aplicacion.Ports.Output.LoginOutputPort;
 import com.example.Usuario.clientes.Aplicacion.Service.CrearUsuario.crearUsuarioDTO;
 import com.example.Usuario.clientes.Dominio.Model.Usuario;
 import com.example.Usuario.clientes.infraestructura.Adapters.Output.Persistence.Mapper.UsuarioPersistenceMapper;
 import com.example.Usuario.clientes.infraestructura.Adapters.Output.Persistence.Repository.UsuarioRepository;
+import com.example.Usuario.clientes.infraestructura.Adapters.Security.JWTServicio;
+import com.example.Usuario.clientes.infraestructura.Adapters.Security.SecurityConfig;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class UsuarioPersistenceAdapter implements CreacionUsuarioOutputPersitencePort {
+public class UsuarioPersistenceAdapter implements CreacionUsuarioOutputPersitencePort, LoginOutputPort {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioPersistenceMapper usuarioPersistenceMapper;
     private final PersonaPersistenceMapper personaPersistenceMapper;
     private final PersonaRepository personaRepository;
+    private final JWTServicio jwtServicio;
+    private final SecurityConfig securityConfig;
 
 
 
@@ -35,5 +40,23 @@ public class UsuarioPersistenceAdapter implements CreacionUsuarioOutputPersitenc
                         usuarioPersistenceMapper.toUsuarioEntity(usuario)
                 )
         );
+    }
+
+    @Override
+    public String login(Usuario loginUsuarioDTO) {
+        Usuario usuario = usuarioRepository.findByUsername(loginUsuarioDTO.getUsername())
+                .map(usuarioPersistenceMapper::toPUssuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+
+//        if (!securityConfig.passwordEncoder().matches(loginUsuarioDTO.getPassword(), usuario.getPassword())) {
+//            throw new RuntimeException("Contraseña incorrecta");
+//        }
+        if (!(loginUsuarioDTO.getPassword().equals(usuario.getPassword()) )) {
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+        String token = jwtServicio.obtenerToken(usuario);
+
+        return token;
     }
 }
