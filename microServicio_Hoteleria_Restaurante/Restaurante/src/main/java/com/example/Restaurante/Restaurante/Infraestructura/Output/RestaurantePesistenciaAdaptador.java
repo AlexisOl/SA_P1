@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -31,10 +32,10 @@ public class RestaurantePesistenciaAdaptador implements CreacionRestauranteOutpu
 
     @Override
     @Transactional(readOnly = true)
-    public Restaurante listarRestaurantesEspecifico(UUID id) {
-        return this.restauranteMapper.ToRestaurante(
+    public Optional<Restaurante> listarRestaurantesEspecifico(UUID id) {
+        return Optional.ofNullable(this.restauranteMapper.ToRestaurante(
                 this.restauranteRepository.findById(id).get()
-        );
+        ));
     }
 
     @Override

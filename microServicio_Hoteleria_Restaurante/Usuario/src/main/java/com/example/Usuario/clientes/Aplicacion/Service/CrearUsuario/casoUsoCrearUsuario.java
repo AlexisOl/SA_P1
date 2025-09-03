@@ -8,6 +8,7 @@ import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.P
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Repository.PersonaRepository;
 import com.example.Usuario.clientes.Aplicacion.Ports.Input.CreacionUsuarioInputPort;
 import com.example.Usuario.clientes.Aplicacion.Ports.Output.CreacionUsuarioOutputPersitencePort;
+import com.example.Usuario.clientes.Dominio.Model.TipoEmpleado;
 import com.example.Usuario.clientes.Dominio.Model.Usuario;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -44,7 +45,9 @@ public class casoUsoCrearUsuario implements CreacionUsuarioInputPort {
                     new Usuario(UUID.randomUUID(),
                             usuarioDTO.getUsername(),
                             usuarioDTO.getPassword(),
-                            personaPersistenceMapper.toPersona(personaPersistenceMapper.toPersonaEntity(nuevaPersona))));
+                            personaPersistenceMapper.toPersona(personaPersistenceMapper.toPersonaEntity(nuevaPersona)),
+                    TipoEmpleado.CLIENTE
+                    ));
             return nuevoUsuario;
         }
     }

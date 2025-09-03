@@ -1,6 +1,7 @@
 package com.example.Usuario.clientes.infraestructura.Adapters.Input.Rest.Model.Response;
 
 import com.example.Usuario.Persona.Dominio.Persona;
+import com.example.Usuario.clientes.Dominio.Model.TipoEmpleado;
 import lombok.*;
 
 import java.util.UUID;
@@ -15,4 +16,5 @@ public class UsuarioResponse {
     private String username;
     private String password;
     private Persona persona;
+    private TipoEmpleado tipoEmpleado;
 }

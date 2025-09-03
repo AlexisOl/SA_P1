@@ -19,4 +19,6 @@ public class CreacionUsuarioRequest {
     @NotEmpty(message = "No pueden haber campos vacios ni nulos")
     private Long cui;
 
+
+
 }

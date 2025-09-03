@@ -5,6 +5,7 @@ import com.example.Restaurante.Restaurante.Aplicacion.Ports.Output.ListarRestaur
 import com.example.Restaurante.Restaurante.Dominio.Restaurante;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -16,7 +17,7 @@ public class ListarRestauranteEspecifico implements ListarRestaurantesEspecifico
         this.listarRestaurantesEspecificosOutputPort= listarRestaurantesEspecificosOutputPort;
     }
     @Override
-    public Restaurante listarRestauranteEspecifico(UUID id) {
+    public Optional<Restaurante> listarRestauranteEspecifico(UUID id) {
         // ver si existe
 
         return this.listarRestaurantesEspecificosOutputPort.listarRestaurantesEspecifico(id);

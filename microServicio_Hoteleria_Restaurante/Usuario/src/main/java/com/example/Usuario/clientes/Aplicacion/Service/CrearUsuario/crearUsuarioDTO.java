@@ -32,6 +32,9 @@ public class crearUsuarioDTO {
     @Email
     private String correo;
 
+
+
+
     // para el dominio
     public Persona toDomainPersona() {
         return new Persona(cui, nombre, fechaNacimiento, direccion, telefono, correo);

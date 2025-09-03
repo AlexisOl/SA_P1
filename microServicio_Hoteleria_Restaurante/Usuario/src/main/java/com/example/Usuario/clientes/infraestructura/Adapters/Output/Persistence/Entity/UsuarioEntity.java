@@ -2,6 +2,7 @@ package com.example.Usuario.clientes.infraestructura.Adapters.Output.Persistence
 
 import com.example.Usuario.Persona.Dominio.Persona;
 import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.Entity.PersonaEntity;
+import com.example.Usuario.clientes.Dominio.Model.TipoEmpleado;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,11 +28,17 @@ public class UsuarioEntity implements UserDetails, Serializable {
     @Column( nullable = false, unique = true)
 
     private String username;
-    private String password;
 
+    @Column( nullable = false)
+
+    private String password;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona", referencedColumnName = "cui", nullable = false)
     private PersonaEntity persona;
+
+
+    @Enumerated(EnumType.STRING)
+    private TipoEmpleado tipoEmpleado;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

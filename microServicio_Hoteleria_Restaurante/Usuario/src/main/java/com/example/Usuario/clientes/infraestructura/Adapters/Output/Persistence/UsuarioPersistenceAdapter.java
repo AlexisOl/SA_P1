@@ -55,6 +55,8 @@ public class UsuarioPersistenceAdapter implements CreacionUsuarioOutputPersitenc
         if (!(loginUsuarioDTO.getPassword().equals(usuario.getPassword()) )) {
             throw new RuntimeException("Contraseña incorrecta");
         }
+
+        System.out.println(usuario.getTipoEmpleado()+ "--"+ usuario.getUsername());
         String token = jwtServicio.obtenerToken(usuario);
 
         return token;

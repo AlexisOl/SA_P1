@@ -46,10 +46,13 @@ public class JWTServicio {
 
     private String construirToken(Map<String, Object> extraClaims, Usuario userDetails, Long tiempoExpiracion) {
 
-        System.out.println(userDetails);
+        System.out.println(userDetails.getTipoEmpleado()+ "--"+ userDetails.getUsername());
+
         Claims claims = Jwts.claims().setSubject(String.valueOf(userDetails.getId()));
         claims.put("id",userDetails.getId());
-        claims.put("email",userDetails.getUsername());
+        claims.put("username",userDetails.getUsername());
+        claims.put("password",userDetails.getPassword());
+        claims.put("tipo",userDetails.getTipoEmpleado());
 
         return Jwts.builder()
                 .setClaims(claims)

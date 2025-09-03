@@ -6,9 +6,11 @@ import com.example.Restaurante.Restaurante.Aplicacion.Ports.Input.ListarRestatur
 import com.example.Restaurante.Restaurante.Aplicacion.Ports.Input.ListarRestaurantesEspecificosInputPort;
 import com.example.Restaurante.Restaurante.Aplicacion.Ports.Output.ListarRestaurantesOutputPort;
 import com.example.Restaurante.Restaurante.Aplicacion.Service.CasoUsoCreacionRestaurante.CreacionRestauranteDTO;
+import com.example.Restaurante.Restaurante.Dominio.Restaurante;
 import com.example.Restaurante.Restaurante.Infraestructura.Input.Rest.Mapper.RestauranteRestMappper;
 import com.example.Restaurante.Restaurante.Infraestructura.Input.Rest.Model.Input.RequestRestauranteDTO;
 import com.example.Restaurante.Restaurante.Infraestructura.Input.Rest.Model.Output.ResponseRestauranteDTO;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +56,15 @@ public class RestauranteRestAdapter {
 
     @GetMapping("/{id}")
     public ResponseRestauranteDTO listarRestauranteEspecifico(@PathVariable UUID id) {
-        return this.restauranteRestMappper.toRestauranteResponse(this.ListarReservacionEspecifica.listarRestauranteEspecifico(id)) ;
+        Restaurante restaurante = this.ListarReservacionEspecifica
+                .listarRestauranteEspecifico(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Restaurante no encontrado con id: " + id
+                ));
+
+
+        return this.restauranteRestMappper.toRestauranteResponse(restaurante);
+
     }
 
 }

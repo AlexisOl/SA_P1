@@ -5,6 +5,8 @@ import com.example.Usuario.Persona.Infraestructura.Adapters.Output.Persientece.E
 import com.example.Usuario.clientes.Dominio.Model.Usuario;
 import com.example.Usuario.clientes.infraestructura.Adapters.Output.Persistence.Entity.UsuarioEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
@@ -12,5 +14,7 @@ import java.util.List;
 
 public interface UsuarioPersistenceMapper {
     UsuarioEntity toUsuarioEntity(Usuario usuario);
+
+    @Mapping(source = "tipoEmpleado", target = "tipoEmpleado")
     Usuario toPUssuario(UsuarioEntity usuarioEntity);
 }

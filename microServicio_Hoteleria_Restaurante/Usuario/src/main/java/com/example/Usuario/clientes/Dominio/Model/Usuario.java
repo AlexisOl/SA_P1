@@ -15,5 +15,6 @@ public class Usuario {
     private String username;
     private String password;
     private Persona persona;
+    private TipoEmpleado tipoEmpleado;
 
 }
