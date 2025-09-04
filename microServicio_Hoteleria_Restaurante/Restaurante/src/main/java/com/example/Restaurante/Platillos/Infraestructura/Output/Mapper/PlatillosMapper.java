@@ -5,6 +5,8 @@ import com.example.Restaurante.Platillos.Infraestructura.Output.Entity.Platillos
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 
 public interface PlatillosMapper {
@@ -12,4 +14,10 @@ public interface PlatillosMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "idrestaurante", target = "idrestaurante")
     PlatillosEntity toPlatillosEntity(Platillos platillos);
+
+
+    List<Platillos> toListPlatillos(List<PlatillosEntity> platillosEntities);
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "idrestaurante", target = "idrestaurante")
+    List<PlatillosEntity> toListPlatillosEntity(List<Platillos> platillosEntities);
 }

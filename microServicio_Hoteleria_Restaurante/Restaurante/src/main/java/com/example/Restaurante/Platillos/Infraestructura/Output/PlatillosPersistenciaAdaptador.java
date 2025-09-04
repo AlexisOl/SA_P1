@@ -1,17 +1,25 @@
 package com.example.Restaurante.Platillos.Infraestructura.Output;
 
 
+import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatilloEspecificoInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.CrearPlatilloOutputPort;
+import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.ListarPlatilloEspecificoOutputPort;
+import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.ListarPlatillosOutputPort;
 import com.example.Restaurante.Platillos.Dominio.Platillos;
 import com.example.Restaurante.Platillos.Infraestructura.Output.Mapper.PlatillosMapper;
 import com.example.Restaurante.Platillos.Infraestructura.Output.Repository.PlatillosRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 @AllArgsConstructor
 
-public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort {
+public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort, ListarPlatilloEspecificoOutputPort ,
+        ListarPlatillosOutputPort {
     private PlatillosMapper platillosMapper;
     private PlatillosRepository platillosRepository;
 
@@ -23,5 +31,21 @@ public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort {
                         this.platillosMapper.toPlatillosEntity(platillos)
                 )
         );
+    }
+
+    @Override
+    public Optional<Platillos> listarPlatillos(UUID id) {
+        return Optional.ofNullable(
+                this.platillosMapper.toPlatillos(
+                        this.platillosRepository.findById(id).get()
+                )
+        );
+    }
+
+    @Override
+    public List<Platillos> listarPlatillos() {
+        return (this.platillosMapper.toListPlatillos(
+                this.platillosRepository.findAll()
+        ));
     }
 }

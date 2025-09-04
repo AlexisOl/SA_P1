@@ -2,9 +2,10 @@ package com.example.Restaurante.Platillos.Aplicacion.Ports.Input;
 
 import com.example.Restaurante.Platillos.Dominio.Platillos;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface ListarPlatillosInputPort {
-    List<Platillos> listarPlatillos();
+public interface ListarPlatilloEspecificoInputPort {
+
+    Optional<Platillos> listarPlatillos(UUID id);
 }
