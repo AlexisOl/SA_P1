@@ -1,15 +1,18 @@
 package com.example.hoteleria.Calificacion.Infraestructura.Output;
 
 import com.example.hoteleria.Calificacion.Aplicacion.Ports.Output.CrearCalificacionOutputPort;
+import com.example.hoteleria.Calificacion.Aplicacion.Ports.Output.PromedioValoracionHabitacion;
 import com.example.hoteleria.Calificacion.Dominio.Calificacion;
 import com.example.hoteleria.Calificacion.Infraestructura.Output.Mapper.CalificacionMapper;
 import com.example.hoteleria.Calificacion.Infraestructura.Output.Repository.CalificacionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @AllArgsConstructor
-public class CalificacionPersistenciaAdaptador implements CrearCalificacionOutputPort {
+public class CalificacionPersistenciaAdaptador implements CrearCalificacionOutputPort, PromedioValoracionHabitacion {
 
 
     private final CalificacionRepository calificacionRepository;
@@ -23,5 +26,10 @@ public class CalificacionPersistenciaAdaptador implements CrearCalificacionOutpu
                         this.calificacionMapper.toCalificacionEntity(calificacion)
                 )
         );
+    }
+
+    @Override
+    public Double promedioValoracion(UUID id) {
+        return this.calificacionRepository.calcularPromedioValoracionHabitacion(id);
     }
 }

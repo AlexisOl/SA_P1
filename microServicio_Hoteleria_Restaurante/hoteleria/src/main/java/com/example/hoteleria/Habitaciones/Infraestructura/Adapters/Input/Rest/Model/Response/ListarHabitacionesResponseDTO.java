@@ -19,4 +19,5 @@ public class ListarHabitacionesResponseDTO {
     private Hotel hotel;
     private TipoHabitacion tipoHabitacion;
     private Double precio;
+    private Double promedio_valoracion;
 }

@@ -21,11 +21,12 @@ public interface CreacionHabitacionRestMapper {
 
 
     List<Habitacion> toHabitacionLista(List<ListarHabitacionesRequestDTO> habitacionesRequestDTO);
-
+    @Mapping(source = "promedio_valoracion", target = "promedio_valoracion")
     List<ListarHabitacionesResponseDTO> toHabitacionesListaResponse(List<Habitacion> habitacion);
 
     Habitacion toHabitacion(BuscarHabitacionResponseDTO habitacion);
     @Mapping(source = "tipoHabitacion", target = "tipoHabitacion")
     @Mapping(source = "precio", target = "precio")
+    @Mapping(source = "promedio_valoracion", target = "promedio_valoracion")
     BuscarHabitacionResponseDTO toBuscarHabitacionResponse(Habitacion habitacion);
 }

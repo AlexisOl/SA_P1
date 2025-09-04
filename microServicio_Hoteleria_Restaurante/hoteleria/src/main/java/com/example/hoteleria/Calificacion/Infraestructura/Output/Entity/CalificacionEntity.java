@@ -20,10 +20,10 @@ public class CalificacionEntity {
     @Id
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String comentario;
  //   @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double puntuacion;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idreservacion", nullable = false)
