@@ -15,7 +15,7 @@ public class DetalleFacturaRestaurante {
     private Double precioParcial;
     private FacturaRestaurante facturaRestaurante;
 
-    private DetalleFacturaRestaurante(UUID id, UUID idplatillo, Long cantidad, Double precioParcial, FacturaRestaurante facturaRestaurante) {
+    public DetalleFacturaRestaurante(UUID id, UUID idplatillo, Long cantidad, Double precioParcial, FacturaRestaurante facturaRestaurante) {
         this.id = id;
         this.idplatillo = idplatillo;
         this.cantidad = cantidad;
