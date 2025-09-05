@@ -10,9 +10,9 @@ import java.util.UUID;
 @Setter
 public class DetalleFactura_Hotel {
 
-    private final UUID id;
+    private  UUID id;
 
-    private final LocalDate fecha;
+    private  LocalDate fecha;
 
     private UUID id_reservacion;
 

@@ -6,10 +6,14 @@ import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model.Output
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "Spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 
 public interface EmpleadoHotelRestMapper {
     EmpleadoHotel toEmpleadoHotel(RequestEmpleadoHotelDTO requestEmpleadoHotelDTO);
 
     ResponseEmpleadoHotelDTO  toResponseEmpleadoHotel(EmpleadoHotel empleadoHotel);
+
+    List<ResponseEmpleadoHotelDTO> toListResponseEmpleadoHotel(List<EmpleadoHotel> empleadoHotel);
 }

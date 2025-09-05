@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = "com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Feigns")
+@EnableFeignClients(basePackages = {"com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Feigns", "com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns"})
 @SpringBootApplication
 public class FacturacionApplication {
 

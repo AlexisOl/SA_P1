@@ -1,0 +1,9 @@
+package com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Input.Rest.Mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
+
+@Mapper(componentModel = "Spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+
+public interface DetalleFacturaRestauranteRestMapper {
+}
