@@ -7,5 +7,4 @@ COPY mcsv-hoteleria.jar /app/mcsv-hoteleria.jar
 EXPOSE 8081
 
 #ENV SPRING_PROFILES_ACTIVE=prod
-
 ENTRYPOINT ["java", "-jar", "mcsv-hoteleria.jar"]
