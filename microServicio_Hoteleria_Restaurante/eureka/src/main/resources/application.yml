@@ -6,8 +6,8 @@ spring:
     name: mscv-eureka
 
 eureka:
-  instance:
-    hostname: 0.0.0.0
   client:
     register-with-eureka: false
     fetch-registry: false
+  instance:
+    hostname: 44.223.54.192
