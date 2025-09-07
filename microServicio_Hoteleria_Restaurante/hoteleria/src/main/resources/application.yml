@@ -8,7 +8,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://clase2-semi1.cctockmoifnj.us-east-1.rds.amazonaws.com:3306
+    url: jdbc:mysql://clase2-semi1.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/hoteleria_mcsv
     username: admin
     password: AgAzjSglkmJY6823uFCQ
   #datasource:
@@ -23,7 +23,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
    # hibernate:
