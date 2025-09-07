@@ -30,7 +30,7 @@ spring:
   eureka:
     client:
       service-url:
-        defaultZone: http://mcsv-eureka:8761/eureka/
+        defaultZone: http://44.223.54.192:8761/eureka/
       register-with-eureka: true
       fetch-registry: true
    # hibernate:
