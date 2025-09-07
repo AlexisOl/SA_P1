@@ -1,11 +1,10 @@
-package com.example.hoteleria.Calificacion.Aplicacion.Service.CrearCalificacionCasoUso;
+package com.example.hoteleria.Calificacion.Aplicacion.Service.CasosUso.CrearCalificacionCasoUso;
 
 import com.example.hoteleria.Calificacion.Aplicacion.Ports.Input.CrearCalificacionInputPort;
 import com.example.hoteleria.Calificacion.Aplicacion.Ports.Output.CrearCalificacionOutputPort;
 import com.example.hoteleria.Calificacion.Dominio.Calificacion;
 import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.ListarReservacionEspecificaOutput;
 import com.example.hoteleria.Rerservacion.Dominio.Reservacion;
-import lombok.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

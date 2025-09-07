@@ -1,4 +1,4 @@
-package com.example.hoteleria.Calificacion.Aplicacion.Service.CrearCalificacionCasoUso;
+package com.example.hoteleria.Calificacion.Aplicacion.Service.CasosUso.CrearCalificacionCasoUso;
 
 import com.example.hoteleria.Calificacion.Dominio.Puntuacion;
 import com.example.hoteleria.Rerservacion.Dominio.Reservacion;

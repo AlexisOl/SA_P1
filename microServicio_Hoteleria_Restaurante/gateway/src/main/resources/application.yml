@@ -1,0 +1,33 @@
+eureka:
+  client:
+    register-with-eureka: false
+
+server:
+  port: 8088
+
+spring:
+  application:
+    name: mcsv-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: hotel-dev
+          uri: http://localhost:8081
+          predicates:
+            - Path=/hotel/**
+        - id: habitaciones-dev
+          uri: http://localhost:8081
+          predicates:
+            - Path=/habitaciones/**
+        - id: calificaciones-hotel-dev
+          uri: http://localhost:8081
+          predicates:
+            - Path=/calificacion/**
+        - id: clientes-dev-clientes
+          uri: http://34.204.2.247:8184
+          predicates:
+            - Path=/clientes/**
+
