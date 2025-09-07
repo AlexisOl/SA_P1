@@ -30,6 +30,7 @@
 
 	<modules>
 		<module>gateway</module>
+		<module>eureka</module>
 		<module>hoteleria</module>
 		<module>Usuario</module>
 		<module>facturacion</module>

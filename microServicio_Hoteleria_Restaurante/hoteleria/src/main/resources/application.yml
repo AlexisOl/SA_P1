@@ -26,6 +26,13 @@ spring:
       ddl-auto: create
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  eureka:
+    instance:
+      hostname: 44.223.54.192
+    client:
+      service-url:
+        defaultZone: http://44.223.54.192:8761/eureka
    # hibernate:
    #   ddl-auto: update
    # database: mariabd
