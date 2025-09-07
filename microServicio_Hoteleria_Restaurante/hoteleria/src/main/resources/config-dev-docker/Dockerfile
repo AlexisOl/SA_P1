@@ -8,4 +8,4 @@ EXPOSE 8081
 
 #ENV SPRING_PROFILES_ACTIVE=prod
 
-ENTRYPOINT ["java", "-jar", "mcsv-hoteleria.jar", "--spring.config.name=application-dev"]
+ENTRYPOINT ["java", "-jar", "mcsv-hoteleria.jar"]
