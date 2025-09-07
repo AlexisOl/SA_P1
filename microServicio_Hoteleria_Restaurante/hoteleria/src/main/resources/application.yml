@@ -27,12 +27,12 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
-  eureka:
-    client:
-      service-url:
-        defaultZone: http://44.223.54.192:8761/eureka/
-      register-with-eureka: true
-      fetch-registry: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://44.223.54.192:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
 
    # hibernate:
    #   ddl-auto: update
