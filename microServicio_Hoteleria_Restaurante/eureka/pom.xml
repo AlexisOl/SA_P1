@@ -85,9 +85,9 @@
 								<copy todir="${basedir}/target/config-dev-docker">
 									<fileset dir="${basedir}/src/main/resources/config-dev-docker" />
 								</copy>
-								<copy todir="${basedir}/target/config-prod-docker">
-									<fileset dir="${basedir}/src/main/resources/config-prod-docker" />
-								</copy>
+<!--								<copy todir="${basedir}/target/config-prod-docker">-->
+<!--									<fileset dir="${basedir}/src/main/resources/config-prod-docker" />-->
+<!--								</copy>-->
 							</target>
 						</configuration>
 						<goals>
