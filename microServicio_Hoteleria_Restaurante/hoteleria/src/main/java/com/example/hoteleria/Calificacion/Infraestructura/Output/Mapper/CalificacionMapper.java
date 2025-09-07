@@ -15,7 +15,7 @@ public interface CalificacionMapper {
     CalificacionEntity toCalificacionEntity(Calificacion calificacion);
 
 
-    List<Calificacion> toCalificacion(List<CalificacionEntity> calificacionEntities);
+    List<Calificacion> toCalificacionList(List<CalificacionEntity> calificacionEntities);
 
     List<CalificacionEntity> toCalificacionEntityList(List<Calificacion> calificaciones);
 }

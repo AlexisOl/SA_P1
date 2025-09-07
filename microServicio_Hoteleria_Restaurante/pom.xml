@@ -29,6 +29,7 @@
 	</scm>
 
 	<modules>
+		<module>gateway</module>
 		<module>hoteleria</module>
 		<module>Usuario</module>
 		<module>facturacion</module>
