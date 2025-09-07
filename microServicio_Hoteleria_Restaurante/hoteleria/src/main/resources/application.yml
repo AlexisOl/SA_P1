@@ -33,6 +33,7 @@ spring:
         defaultZone: http://44.223.54.192:8761/eureka/
       register-with-eureka: true
       fetch-registry: true
+
    # hibernate:
    #   ddl-auto: update
    # database: mariabd
