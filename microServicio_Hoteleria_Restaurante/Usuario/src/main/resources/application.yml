@@ -25,3 +25,11 @@ spring:
         jwt:
             secret-key: k7ehq9LLttTbATjmp82uAm1DjrGoUn5fGhWW8n9t64I=
             secret-expiration-time: 3600000
+
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://44.223.54.192:8761/eureka/
+        register-with-eureka: true
+        fetch-registry: true
