@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY mcsv-gateway.jar /app/mcsv-gateway.jar
 
-EXPOSE 8761
+EXPOSE 8088
 
 #ENV SPRING_PROFILES_ACTIVE=prod
 ENTRYPOINT ["java", "-jar", "mcsv-gateway.jar"]

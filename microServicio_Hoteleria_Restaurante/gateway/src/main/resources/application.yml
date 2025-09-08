@@ -21,11 +21,11 @@ spring:
           predicates:
             - Path=/hotel/**
         - id: habitaciones-dev
-          uri: http://44.223.54.192::8081
+          uri: http://44.223.54.192:8081
           predicates:
             - Path=/habitaciones/**
         - id: calificaciones-hotel-dev
-          uri: http://44.223.54.192::8081
+          uri: http://44.223.54.192:8081
           predicates:
             - Path=/calificacion/**
         - id: clientes-dev-clientes
