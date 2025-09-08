@@ -14,7 +14,6 @@ import java.util.UUID;
 @Value
 @AllArgsConstructor
 public class crearUsuarioDTO {
-
     @NotBlank
     private String username;
     @NotNull
