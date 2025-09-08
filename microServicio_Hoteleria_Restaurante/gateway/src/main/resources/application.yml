@@ -30,8 +30,8 @@ spring:
           uri: http://44.223.54.192:8081
           predicates:
             - Path=/calificacion/**
-        - id: clientes-dev-clientes
-          uri: http://44.223.54.192:8084
+        - id: usuario-dev
+          uri: http://44.223.54.192:8082
           predicates:
             - Path=/clientes/**
         - id: restaurante-dev
@@ -46,3 +46,7 @@ spring:
           uri: http://44.223.54.192:8085
           predicates:
             - Path=/calificacionRestaurante/**
+        - id: persona-dev
+          uri: http://44.223.54.192:8082
+          predicates:
+            - Path=/persona/**
