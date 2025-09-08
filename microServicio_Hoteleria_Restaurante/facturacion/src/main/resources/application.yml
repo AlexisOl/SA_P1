@@ -8,9 +8,9 @@ spring:
   datasource:
     #  driver-class-name: com.mysql.cj.jdbc.Driver
 
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/facturacion_mcsv
-    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://facturacion-mcsv.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/facturacion_mcsv
+    username: admin
     password: password
 
 
@@ -20,5 +20,11 @@ spring:
     # database: mariabd
     database-platform: org.hibernate.dialect.MariaDBDialect
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://44.223.54.192:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
 #database-platform: org.hibernate.dialect.MySQL8Dialect
 

@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  gateway:
+    image: gateway
+    build:
+      context: ../
+      dockerfile: ./config-dev-docker/Dockerfile
+    container_name: gateway
+    restart: always
+    environment:
+      #- SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=8088
+    ports:
+      - "8088:8088"
+    expose:
+      - 8088
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.4"

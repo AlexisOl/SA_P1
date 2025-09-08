@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>gateway</artifactId>
+	<artifactId>eureka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gateway</name>
+	<name>eureka</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -30,39 +30,31 @@
 		<java.version>21</java.version>
 		<spring-cloud.version>2025.0.0</spring-cloud.version>
 	</properties>
-
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<!--eureka -->
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 	</dependencies>
-
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -74,39 +66,36 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 	<build>
-		<finalName>mcsv-gateway</finalName>
+		<finalName>mcsv-eureka</finalName>
 		<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<executions>
-						<execution>
-							<phase>compile</phase>
-							<configuration>
-								<target>
-									<echo>Copiando las carpetas de configuración Docker</echo>
-									<copy todir="${basedir}/target/config-dev-docker">
-										<fileset dir="${basedir}/src/main/resources/config-dev-docker" />
-									</copy>
-									<!--								<copy todir="${basedir}/target/config-prod-docker">-->
-									<!--									<fileset dir="${basedir}/src/main/resources/config-prod-docker" />-->
-									<!--								</copy>-->
-								</target>
-							</configuration>
-							<goals>
-
-								<goal>run</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<configuration>
+							<target>
+								<echo>Copiando las carpetas de configuración Docker</echo>
+								<copy todir="${basedir}/target/config-dev-docker">
+									<fileset dir="${basedir}/src/main/resources/config-dev-docker" />
+								</copy>
+<!--								<copy todir="${basedir}/target/config-prod-docker">-->
+<!--									<fileset dir="${basedir}/src/main/resources/config-prod-docker" />-->
+<!--								</copy>-->
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

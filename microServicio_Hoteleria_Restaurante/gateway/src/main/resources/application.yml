@@ -1,9 +1,12 @@
-eureka:
-  client:
-    register-with-eureka: false
-
 server:
   port: 8088
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://44.223.54.192:8761/eureka/
 
 spring:
   application:
@@ -13,21 +16,22 @@ spring:
       discovery:
         locator:
           enabled: true
+          lower-case-service-id: true
       routes:
         - id: hotel-dev
-          uri: http://localhost:8081
+          uri: http://44.223.54.192:8081
           predicates:
             - Path=/hotel/**
         - id: habitaciones-dev
-          uri: http://localhost:8081
+          uri: http://44.223.54.192:8081
           predicates:
             - Path=/habitaciones/**
         - id: calificaciones-hotel-dev
-          uri: http://localhost:8081
+          uri: http://44.223.54.192:8081
           predicates:
             - Path=/calificacion/**
-        - id: clientes-dev-clientes
-          uri: http://34.204.2.247:8184
+        - id: usuario-dev
+          uri: http://44.223.54.192:8082
           predicates:
-            - Path=/clientes/**
+            - Path=/usuario/**
 

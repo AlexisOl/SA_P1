@@ -13,7 +13,7 @@ public class Calificacion {
     private Double puntuacion;
     private Reservacion reservacion;
 
-    
+
     public Calificacion(UUID id, String comentario, Double puntuacion, Reservacion reservacion) {
         this.id = id;
         this.comentario = comentario;
