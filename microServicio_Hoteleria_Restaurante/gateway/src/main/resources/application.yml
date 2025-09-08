@@ -34,4 +34,15 @@ spring:
           uri: http://44.223.54.192:8184
           predicates:
             - Path=/clientes/**
-
+        - id: restaurante-dev
+          uri: http://44.223.54.192:8185
+          predicates:
+            - Path=/restaurante/**
+        - id: platillos-dev
+          uri: http://44.223.54.192:8185
+          predicates:
+            - Path=/platillos/**
+        - id: calificacion-platillos-dev
+          uri: http://44.223.54.192:8185
+          predicates:
+            - Path=/calificacionRestaurante/**
