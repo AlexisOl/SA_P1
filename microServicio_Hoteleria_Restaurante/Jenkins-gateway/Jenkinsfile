@@ -17,9 +17,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'cd microServicio_Hoteleria_Restaurante/eureka && mvn package -DskipTests'
-                sh 'cd microServicio_Hoteleria_Restaurante/eureka/target/config-dev-docker && sudo docker-compose down'
-                sh 'cd microServicio_Hoteleria_Restaurante/eureka/target/config-dev-docker && sudo docker-compose up --build -d'
+                sh 'cd microServicio_Hoteleria_Restaurante/gateway && mvn package -DskipTests'
+                sh 'cd microServicio_Hoteleria_Restaurante/gateway/target/config-dev-docker && sudo docker-compose down'
+                sh 'cd microServicio_Hoteleria_Restaurante/gateway/target/config-dev-docker && sudo docker-compose up --build -d'
                 echo "Despliegue a DEV exitoso"
 
             }
