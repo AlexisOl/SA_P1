@@ -8,7 +8,7 @@ spring:
   datasource:
     #  driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://mrestaurante.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/restaurante_mcsv
+    url: jdbc:mariadb://restaurante.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/restaurante_mcsv
     username: admin
     password: password
 
