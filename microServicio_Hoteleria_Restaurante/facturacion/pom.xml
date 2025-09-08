@@ -100,6 +100,22 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!--eureka -->
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -112,7 +128,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 
 
 	<build>
@@ -145,7 +160,6 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
-
 			<!-- Spring Boot Maven Plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -196,5 +210,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
