@@ -5,6 +5,8 @@ eureka:
 server:
   port: 8088
 
+
+
 spring:
   application:
     name: mcsv-gateway
