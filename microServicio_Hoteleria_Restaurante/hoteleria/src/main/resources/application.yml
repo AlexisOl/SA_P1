@@ -10,7 +10,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://hoteleria.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/hoteleria_mcsv
     username: admin
-    password: AgAzjSglkmJY6823uFCQ
+    password: password
   #datasource:
   #  driver-class-name: com.mysql.cj.jdbc.Driver
 
