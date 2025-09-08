@@ -34,7 +34,7 @@ public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort, 
     }
 
     @Override
-    public Optional<Platillos> listarPlatillos(UUID id) {
+    public Optional<Platillos> listarPlatillosEspecificos(UUID id) {
         return Optional.ofNullable(
                 this.platillosMapper.toPlatillos(
                         this.platillosRepository.findById(id).get()
@@ -43,9 +43,9 @@ public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort, 
     }
 
     @Override
-    public List<Platillos> listarPlatillos() {
+    public List<Platillos> listarPlatillos(UUID id) {
         return (this.platillosMapper.toListPlatillos(
-                this.platillosRepository.findAll()
+                this.platillosRepository.findAllByIdrestaurante_Id(id)
         ));
     }
 }

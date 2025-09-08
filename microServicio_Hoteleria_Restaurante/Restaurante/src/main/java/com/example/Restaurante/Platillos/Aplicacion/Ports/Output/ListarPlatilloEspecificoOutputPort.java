@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ListarPlatilloEspecificoOutputPort {
-    Optional<Platillos> listarPlatillos(UUID id);
+    Optional<Platillos> listarPlatillosEspecificos(UUID id);
 }

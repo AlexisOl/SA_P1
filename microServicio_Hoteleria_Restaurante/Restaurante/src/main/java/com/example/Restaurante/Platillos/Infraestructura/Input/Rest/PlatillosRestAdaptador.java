@@ -50,15 +50,15 @@ public class PlatillosRestAdaptador {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<ResponsePlatillosDTO> listarPlatillos() {
-        return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosInputPort.listarPlatillos());
+    public List<ResponsePlatillosDTO> listarPlatillos(UUID id) {
+        return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosInputPort.listarPlatillos(id));
     }
 
 
     @GetMapping("/{id}")
     public ResponsePlatillosDTO listarPlatilloEspecifico(@PathVariable UUID id) {
         Platillos platillos = this.listarPlatilloEspecificoInputPort
-                .listarPlatillos(id)
+                .listarPlatillosEspecifico(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Restaurante no encontrado con id: " + id
                 ));
