@@ -35,3 +35,7 @@ spring:
           predicates:
             - Path=/usuario/**
 
+        - id: persona-dev
+          uri: http://44.223.54.192:8082
+          predicates:
+            - Path=/persona/**
