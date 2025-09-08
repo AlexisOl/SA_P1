@@ -26,7 +26,10 @@ spring:
             secret-key: k7ehq9LLttTbATjmp82uAm1DjrGoUn5fGhWW8n9t64I=
             secret-expiration-time: 3600000
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c1da4c7fee60c4b8bb866fd7df9dae321336634b
 eureka:
     client:
         service-url:
