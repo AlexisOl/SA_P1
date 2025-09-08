@@ -48,7 +48,7 @@ public class PlatillosRestAdaptador {
     }
 
 
-    @GetMapping()
+    @GetMapping("/restaurante/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<ResponsePlatillosDTO> listarPlatillos(UUID id) {
         return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosInputPort.listarPlatillos(id));
