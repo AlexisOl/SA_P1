@@ -18,4 +18,5 @@ public interface ReservacionRepository extends JpaRepository<ReservacionEntity, 
 
      Optional<ReservacionEntity> findById(UUID id);
 
+     List<ReservacionEntity> findAllByHabitacion_Hotel_Id(Long habitacionHotelId);
 }

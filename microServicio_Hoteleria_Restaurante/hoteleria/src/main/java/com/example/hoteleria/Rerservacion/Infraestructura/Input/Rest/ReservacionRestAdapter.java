@@ -3,10 +3,7 @@ package com.example.hoteleria.Rerservacion.Infraestructura.Input.Rest;
 
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.CrearHabitacionDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.CrearHabitacionResponseDTO;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.CrearReservacionInputPort;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.ExistenciaReservaHabitacionesEnEsperaInputPort;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.ListarReservacionEspecificaInput;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.ListarReservacionesUsuarioInputPort;
+import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.*;
 import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.CrearReservacionOutputPort;
 import com.example.hoteleria.Rerservacion.Aplicacion.Service.CasosUso.CrearReservacion.CrearReservacionDTO;
 import com.example.hoteleria.Rerservacion.Dominio.TipoReservacion;
@@ -32,6 +29,7 @@ public class ReservacionRestAdapter {
     private final ListarReservacionesUsuarioInputPort listarReservacionesUsuarioInputPort;
     private final CreacionReservacionMapperRest   creacionReservacionMapperRest;
     private final ListarReservacionEspecificaInput listarReservacionEspecificaInput;
+    private final ListarReservacionesHotelInputPort listarReservacionesHotelInputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -53,6 +51,11 @@ public class ReservacionRestAdapter {
     @GetMapping("/clientes/{id}")
     public List<ReservacionResponseDTO> listadoReservacionesPorCliente(@PathVariable UUID id) {
         return this.creacionReservacionMapperRest.toListReservacionResponseDTO(this.listarReservacionesUsuarioInputPort.listarReservacionesUsuario(id)) ;
+    }
+
+    @GetMapping("/hotel/{id}")
+    public List<ReservacionResponseDTO> listadoReservacionesPorHotel(@PathVariable Long id) {
+        return this.creacionReservacionMapperRest.toListReservacionResponseDTO(this.listarReservacionesHotelInputPort.listarReservacionesHotel(id)) ;
     }
 
     @GetMapping("/{id}")

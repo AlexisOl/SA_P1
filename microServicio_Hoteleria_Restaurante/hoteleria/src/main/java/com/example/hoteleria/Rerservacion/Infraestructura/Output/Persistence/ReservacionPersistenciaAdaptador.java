@@ -1,9 +1,6 @@
 package com.example.hoteleria.Rerservacion.Infraestructura.Output.Persistence;
 
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.CrearReservacionOutputPort;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.ExistenciaHabitacionesEnEsperaId;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.ListarReservacionEspecificaOutput;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.ListarReservacionesUsuarioOutputPort;
+import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.*;
 import com.example.hoteleria.Rerservacion.Dominio.Reservacion;
 import com.example.hoteleria.Rerservacion.Dominio.TipoReservacion;
 import com.example.hoteleria.Rerservacion.Infraestructura.Output.Persistence.Mapper.ReservacionMapper;
@@ -19,7 +16,7 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputPort, ExistenciaHabitacionesEnEsperaId,
-        ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput {
+        ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput, ListarReservacionesHotelOutputPort {
 
     private final ReservacionMapper reservacionMapper;
     private final ReservacionRepository reservacionRepository;
@@ -52,5 +49,10 @@ public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputP
     @Override
     public Reservacion ListarReservacionEspecifica(UUID id) {
         return this.reservacionMapper.toReservacion(this.reservacionRepository.findById(id).get());
+    }
+
+    @Override
+    public List<Reservacion> listarReservacionesHotel(Long id) {
+        return   this.reservacionMapper.toReservacionList(reservacionRepository.findAllByHabitacion_Hotel_Id((id))) ;
     }
 }
