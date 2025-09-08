@@ -33,7 +33,7 @@ spring:
         - id: usuario-dev
           uri: http://44.223.54.192:8082
           predicates:
-            - Path=/clientes/**
+            - Path=/usuario/**
         - id: restaurante-dev
           uri: http://44.223.54.192:8085
           predicates:
