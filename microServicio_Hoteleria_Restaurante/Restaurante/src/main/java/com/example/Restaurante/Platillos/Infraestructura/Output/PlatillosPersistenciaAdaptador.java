@@ -44,6 +44,8 @@ public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort, 
 
     @Override
     public List<Platillos> listarPlatillos(UUID id) {
+
+        System.out.println(this.platillosRepository.buscarPlatillosPorRestaurante(id));
         return (this.platillosMapper.toListPlatillos(
                 this.platillosRepository.buscarPlatillosPorRestaurante(id)
         ));

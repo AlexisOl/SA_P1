@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PlatillosRepository extends JpaRepository<PlatillosEntity, UUID> {
-    @Query("select '*' from PlatillosEntity p where p.idrestaurante =:idrestauranteId")
+    @Query("select p from PlatillosEntity p where p.idrestaurante.id =:idrestauranteId")
     List<PlatillosEntity> buscarPlatillosPorRestaurante(UUID idrestauranteId);
 }

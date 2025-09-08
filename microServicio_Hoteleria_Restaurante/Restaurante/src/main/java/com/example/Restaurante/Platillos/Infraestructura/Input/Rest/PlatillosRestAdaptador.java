@@ -50,7 +50,7 @@ public class PlatillosRestAdaptador {
 
     @GetMapping("/restaurante/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ResponsePlatillosDTO> listarPlatillos(UUID id) {
+    public List<ResponsePlatillosDTO> listarPlatillos(@PathVariable UUID id) {
         return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosInputPort.listarPlatillos(id));
     }
 
