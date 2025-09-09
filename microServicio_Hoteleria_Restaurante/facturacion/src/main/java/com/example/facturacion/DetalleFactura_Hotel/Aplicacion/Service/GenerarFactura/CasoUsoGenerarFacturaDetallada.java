@@ -44,7 +44,7 @@ public class CasoUsoGenerarFacturaDetallada implements GenerarFacturaDetalladaIn
             return this.generarFacturaDetalladaOutputPort.GenerarFacturaDetallada(
                     new DetalleFactura_Hotel(
                             UUID.randomUUID(),
-                            detalleFactura_Hotel.getFecha(),
+                            LocalDate.now(),
                             detalleFactura_Hotel.getId_reservacion(),
                             new precioPorFacturaHotel(reservacionDeterminada.getHabitacion().getPrecio(), reservacionDeterminada.getFechaEntrada(), reservacionDeterminada.getFechaSalida())
                             )

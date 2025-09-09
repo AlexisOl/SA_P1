@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.UUID;
 
-@FeignClient(name ="mcsv-hoteleria", url = "http://localhost:8081")
+@FeignClient(name ="mcsv-hoteleria", url = "http://44.223.54.192:8081")
 public interface ReservacionFeing {
 
     @GetMapping("/reservacion/{id}/en-espera")
