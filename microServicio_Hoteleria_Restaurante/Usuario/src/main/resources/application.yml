@@ -9,9 +9,9 @@ spring:
         #  driver-class-name: com.mysql.cj.jdbc.Driver
 
         driver-class-name: org.mariadb.jdbc.Driver
-        url: jdbc:mariadb://mcsv-usuario.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/mcsv_usuario
+        url: jdbc:mariadb://usuario.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/mcsv_usuario
         username: admin
-        password: GS2Jk48xQkAe2cuFw8aU
+        password: password
 
 
     jpa:
@@ -25,7 +25,6 @@ spring:
         jwt:
             secret-key: k7ehq9LLttTbATjmp82uAm1DjrGoUn5fGhWW8n9t64I=
             secret-expiration-time: 3600000
-
 
 eureka:
     client:
