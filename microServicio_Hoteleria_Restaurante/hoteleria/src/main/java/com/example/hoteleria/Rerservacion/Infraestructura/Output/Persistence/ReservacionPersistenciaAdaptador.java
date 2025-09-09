@@ -47,12 +47,15 @@ public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputP
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Reservacion ListarReservacionEspecifica(UUID id) {
         return this.reservacionMapper.toReservacion(this.reservacionRepository.findById(id).get());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Reservacion> listarReservacionesHotel(Long id) {
+        System.out.println(reservacionRepository.findAllByHabitacion_Hotel_Id((id)).get(1).getTipoReservacion());
         return   this.reservacionMapper.toReservacionList(reservacionRepository.findAllByHabitacion_Hotel_Id((id))) ;
     }
 }
