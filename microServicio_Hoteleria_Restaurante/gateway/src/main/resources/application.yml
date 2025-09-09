@@ -30,12 +30,39 @@ spring:
           uri: http://44.223.54.192:8081
           predicates:
             - Path=/calificacion/**
+        - id: reservacion-dev
+          uri: http://44.223.54.192:8081
+          predicates:
+            - Path=/reservacion/**
         - id: usuario-dev
           uri: http://44.223.54.192:8082
           predicates:
             - Path=/usuario/**
-
+        - id: restaurante-dev
+          uri: http://44.223.54.192:8085
+          predicates:
+            - Path=/restaurante/**
+        - id: platillos-dev
+          uri: http://44.223.54.192:8085
+          predicates:
+            - Path=/platillos/**
+        - id: calificacion-platillos-dev
+          uri: http://44.223.54.192:8085
+          predicates:
+            - Path=/calificacionRestaurante/**
         - id: persona-dev
           uri: http://44.223.54.192:8082
           predicates:
             - Path=/persona/**
+        - id: empleado-hotel-dev
+          uri: http://44.223.54.192:8082
+          predicates:
+            - Path=/empleadoHotel/**
+        - id: factura-hotel-dev
+          uri: http://44.223.54.192:8083
+          predicates:
+            - Path=/detalleFactura/**
+        - id: detalle-factura-hotel-dev
+          uri: http://44.223.54.192:8083
+          predicates:
+            - Path=/detalleFacturaRestaurante/**
