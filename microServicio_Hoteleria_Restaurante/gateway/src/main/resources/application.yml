@@ -30,6 +30,10 @@ spring:
           uri: http://44.223.54.192:8081
           predicates:
             - Path=/calificacion/**
+        - id: reservacion-dev
+          uri: http://44.223.54.192:8081
+          predicates:
+            - Path=/reservacion/**
         - id: usuario-dev
           uri: http://44.223.54.192:8082
           predicates:
