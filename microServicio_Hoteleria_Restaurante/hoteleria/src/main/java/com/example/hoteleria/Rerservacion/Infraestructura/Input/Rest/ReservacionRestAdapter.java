@@ -30,6 +30,7 @@ public class ReservacionRestAdapter {
     private final CreacionReservacionMapperRest   creacionReservacionMapperRest;
     private final ListarReservacionEspecificaInput listarReservacionEspecificaInput;
     private final ListarReservacionesHotelInputPort listarReservacionesHotelInputPort;
+    private final CambiarEstadoReservacionInputPort cambiarEstadoReservacionInputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -62,5 +63,15 @@ public class ReservacionRestAdapter {
     public ReservacionResponseDTO listarReservacionEspecifica(@PathVariable UUID id) {
         return this.creacionReservacionMapperRest.toReservacionResponseDTO(this.listarReservacionEspecificaInput.ListarReservacionEspecifica(id)) ;
     }
+
+    @PutMapping("/{id}/estado")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ReservacionResponseDTO> cambiarEstadoReservacion(@PathVariable UUID id, @RequestParam String nuevoEstado) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(this.creacionReservacionMapperRest.toReservacionResponseDTO(
+                        cambiarEstadoReservacionInputPort.cambioEstado(id, nuevoEstado)
+                ));
+    }
+
 
 }

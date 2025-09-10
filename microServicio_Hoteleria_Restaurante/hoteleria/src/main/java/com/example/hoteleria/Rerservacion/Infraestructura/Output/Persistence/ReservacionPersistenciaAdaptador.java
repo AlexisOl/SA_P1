@@ -16,7 +16,8 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputPort, ExistenciaHabitacionesEnEsperaId,
-        ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput, ListarReservacionesHotelOutputPort {
+        ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput, ListarReservacionesHotelOutputPort,
+        CambiarEstadoReservacionOutputPort{
 
     private final ReservacionMapper reservacionMapper;
     private final ReservacionRepository reservacionRepository;
@@ -57,5 +58,12 @@ public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputP
     public List<Reservacion> listarReservacionesHotel(Long id) {
         System.out.println(reservacionRepository.findAllByHabitacion_Hotel_Id((id)).get(1).getTipoReservacion());
         return   this.reservacionMapper.toReservacionList(reservacionRepository.findAllByHabitacion_Hotel_Id((id))) ;
+    }
+
+    @Override
+    public Reservacion cambiarEstadoReservacion(Reservacion reservacion) {
+        return this.reservacionMapper.toReservacion(
+                this.reservacionRepository.save(reservacionMapper.toReservacionEntity(reservacion))
+        );
     }
 }
