@@ -2,6 +2,7 @@ package com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Output
 
 
 import com.example.facturacion.DetalleFacturaRestaurante.Aplicacion.Ports.Output.CrearDetlleFacturaOutputPort;
+import com.example.facturacion.DetalleFacturaRestaurante.Aplicacion.Ports.Output.ListarDetallaFacturaRestauranteEspecificaOutputPort;
 import com.example.facturacion.DetalleFacturaRestaurante.Dominio.DetalleFacturaRestaurante;
 import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Output.Mapper.DetalleFacturaRestauranteMapper;
 import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Output.Repository.DetalleFacturaRestauranteRepository;
@@ -11,9 +12,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 @AllArgsConstructor
-public class DetalleFacturaRestaurantePersistenciaAdaptador implements CrearDetlleFacturaOutputPort {
+public class DetalleFacturaRestaurantePersistenciaAdaptador implements CrearDetlleFacturaOutputPort, ListarDetallaFacturaRestauranteEspecificaOutputPort {
 
     private final DetalleFacturaRestauranteMapper detalleFacturaRestauranteMapper;
 
@@ -30,5 +34,12 @@ public class DetalleFacturaRestaurantePersistenciaAdaptador implements CrearDetl
                         this.detalleFacturaRestauranteMapper.toDetalleFacturaEntity(detalleFacturaRestaurante)
                 )
         );
+    }
+
+    @Override
+    public List<DetalleFacturaRestaurante> ListarDetalleFactura(UUID id) {
+        return this.detalleFacturaRestauranteMapper.toListFacturaRestaurante(
+                this.detalleFacturaRestauranteRepository.findAllByFacturaRestaurante_Id((id)
+        ));
     }
 }
