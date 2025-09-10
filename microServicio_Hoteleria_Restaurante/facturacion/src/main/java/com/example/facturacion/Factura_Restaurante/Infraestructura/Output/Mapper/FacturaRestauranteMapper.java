@@ -6,6 +6,8 @@ import com.example.facturacion.Factura_Restaurante.Infraestructura.Output.Entity
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 
 public interface FacturaRestauranteMapper {
@@ -15,6 +17,7 @@ public interface FacturaRestauranteMapper {
     @Mapping(source = "precioTotal", target = "precioTotal")
     FacturaRestaurante toFacturaRestaurante(FacturaRestauranteEntity facturaRestauranteEntity);
 
+    List<FacturaRestaurante> toListFacturaRestaurante(List<FacturaRestauranteEntity> facturaRestauranteEntities);
 
     default Double map(PrecioFactura value) {
         return value != null ? value.getPrecioTotal() : null;
