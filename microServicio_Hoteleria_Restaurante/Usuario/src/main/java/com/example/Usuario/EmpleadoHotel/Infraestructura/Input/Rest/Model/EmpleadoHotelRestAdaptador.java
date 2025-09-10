@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class EmpleadoHotelRestAdaptador {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @Transactional
     public ResponseEntity<ResponseEmpleadoHotelDTO> crearEmpleadoHotel(@Valid @RequestBody CrearEmpleadoDTO crearEmpleadoDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.empleadoHotelRestMapper.toResponseEmpleadoHotel(
@@ -43,6 +45,7 @@ public class EmpleadoHotelRestAdaptador {
 //    }
 
     @GetMapping("/{id}")
+    @Transactional(readOnly=true)
     public ResponseEntity<ResponseEmpleadoHotelDTO> listarReservacionEspecifica(@PathVariable UUID id) {
         return this.listarEmpleadoEspecificoHotelInputPort.ListarEmpleadoEspecificoHotel(id)
                 .map(empleado -> ResponseEntity.ok(

@@ -6,5 +6,6 @@ import com.example.Usuario.EmpleadoHotel.Dominio.EmpleadoHotel;
 public interface CrearEmpleadosHotelInputPort
 {
 
+
     EmpleadoHotel crearEmpleadosHotel(CrearEmpleadoDTO empleado);
 }

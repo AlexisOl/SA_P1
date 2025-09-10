@@ -33,4 +33,9 @@ public class CrearEmpleadoDTO {
 
     private LocalDate fecha;
 
+    @NotBlank
+    private String username;
+    @NotNull
+    private String password;
+
 }

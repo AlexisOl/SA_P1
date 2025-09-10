@@ -30,7 +30,8 @@ public class crearUsuarioDTO {
     private String telefono;
     @Email
     private String correo;
-
+    @NotNull
+    private String tipoUsuario;
 
 
 
