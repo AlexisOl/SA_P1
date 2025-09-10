@@ -7,6 +7,7 @@ import com.example.Usuario.EmpleadoHotel.Aplicacion.Service.CrearEmpleadoHotel.C
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Mapper.EmpleadoHotelRestMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model.Output.ResponseEmpleadoHotelDTO;
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Input.CrearEmpleadosRestauranteInputPort;
+import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Input.ListarEmpleadosRestauranteHotelInputPort;
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Service.CrearEmpleadoRestaurante.CrearEmpleadoRestauranteDTO;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Input.Rest.Mapper.EmpleadoRestauranteRestMapper;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Input.Rest.Model.Output.ResponseEmpleadoRestauranteDTO;
@@ -18,12 +19,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/empleadoRestaurante")
 public class EmpleadoRestauranteRestAdaptador {
     private final CrearEmpleadosRestauranteInputPort crearEmpleadosRestauranteInputPort;
     private final EmpleadoRestauranteRestMapper empleadoRestauranteMapper;
+    private final ListarEmpleadosRestauranteHotelInputPort listarEmpleadosRestauranteHotelInputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -33,5 +38,10 @@ public class EmpleadoRestauranteRestAdaptador {
                 .body(this.empleadoRestauranteMapper.toResponseEmpleadoRestauranteDto(
                         crearEmpleadosRestauranteInputPort.crearEmpleadosHRestaurante((crearEmpleadoRestauranteDTO))
                 ));
+    }
+
+    @GetMapping("/restaurante/{id}")
+    public List<ResponseEmpleadoRestauranteDTO> listadoEmpleadosPorHotel(@PathVariable UUID id) {
+        return this.empleadoRestauranteMapper.toListResponseEmpleadoRestaurante(this.listarEmpleadosRestauranteHotelInputPort.listarEmpleadosPorRestaurante(id)) ;
     }
 }

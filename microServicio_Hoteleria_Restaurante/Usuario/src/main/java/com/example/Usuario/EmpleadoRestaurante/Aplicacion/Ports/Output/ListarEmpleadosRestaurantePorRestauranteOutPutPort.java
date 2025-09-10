@@ -1,12 +1,11 @@
-package com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Input;
+package com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output;
 
 import com.example.Usuario.EmpleadoRestaurante.Dominio.EmpleadoRestaurante;
 
 import java.util.List;
 import java.util.UUID;
 
-//empleados por restaurante
-public interface ListarEmpleadosRestauranteHotelInputPort {
-
+public interface ListarEmpleadosRestaurantePorRestauranteOutPutPort {
     List<EmpleadoRestaurante> listarEmpleadosPorRestaurante(UUID id);
+
 }

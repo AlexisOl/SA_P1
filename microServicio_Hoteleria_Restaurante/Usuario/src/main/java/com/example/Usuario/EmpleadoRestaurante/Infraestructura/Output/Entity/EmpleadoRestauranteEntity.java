@@ -24,7 +24,7 @@ public class EmpleadoRestauranteEntity {
     @JoinColumn(name = "id_persona", referencedColumnName = "cui", nullable = false)
     private PersonaEntity persona;
     @Column(name = "RestauranteId", nullable = false)
-    private UUID RestauranteId;
+    private UUID restauranteId;
     @Column(nullable = false)
     private double salario;
     @Column(nullable = false)

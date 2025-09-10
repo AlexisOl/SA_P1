@@ -3,6 +3,7 @@ package com.example.Usuario.EmpleadoHotel.Infraestructura.Output;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.CrearEmpleadosHotelOutputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadoEspecificoHotelOutputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadosHotelOutputPort;
+import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadosPorHotelOutputPort;
 import com.example.Usuario.EmpleadoHotel.Dominio.EmpleadoHotel;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Mapper.EmpleadoHotelMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Repository.EmpleadoHotelRepository;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOutputPort,
-        ListarEmpleadosHotelOutputPort, ListarEmpleadoEspecificoHotelOutputPort {
+        ListarEmpleadosHotelOutputPort, ListarEmpleadoEspecificoHotelOutputPort, ListarEmpleadosPorHotelOutputPort {
 
     private EmpleadoHotelRepository empleadoHotelRepository;
     private EmpleadoHotelMapper empleadoHotelMapper;
@@ -43,5 +44,12 @@ public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOu
     @Override
     public List<EmpleadoHotel> listarEmpleadosHotel() {
         return this.empleadoHotelMapper.toListEmpleadoHotel(this.empleadoHotelRepository.findAll());
+    }
+
+    @Override
+    public List<EmpleadoHotel> listarEmpleadosPorHotel(Long id) {
+        return this.empleadoHotelMapper.toListEmpleadoHotel(
+                this.empleadoHotelRepository.findAllByIdhotel((id))
+        );
     }
 }

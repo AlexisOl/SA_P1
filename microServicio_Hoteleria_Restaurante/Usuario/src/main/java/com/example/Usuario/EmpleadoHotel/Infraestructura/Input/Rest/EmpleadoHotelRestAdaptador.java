@@ -4,6 +4,7 @@ package com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.CrearEmpleadosHotelInputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadoEspecificoHotelInputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadosHotelInputPort;
+import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadosPorHotelInputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Service.CrearEmpleadoHotel.CrearEmpleadoDTO;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Mapper.EmpleadoHotelRestMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model.Output.ResponseEmpleadoHotelDTO;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -22,9 +24,9 @@ import java.util.UUID;
 public class EmpleadoHotelRestAdaptador {
 
     private final CrearEmpleadosHotelInputPort crearEmpleadosHotelInputPort;
-    private final ListarEmpleadosHotelInputPort listarEmpleadosHotelInputPort;
     private final ListarEmpleadoEspecificoHotelInputPort  listarEmpleadoEspecificoHotelInputPort;
     private final EmpleadoHotelRestMapper empleadoHotelRestMapper;
+    private final ListarEmpleadosPorHotelInputPort listarEmpleadosPorHotelInputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -50,5 +52,8 @@ public class EmpleadoHotelRestAdaptador {
                 ))
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    @GetMapping("/hotel/{id}")
+    public List<ResponseEmpleadoHotelDTO> listadoEmpleadosPorHotel(@PathVariable Long id) {
+        return this.empleadoHotelRestMapper.toListResponseEmpleadoHotel(this.listarEmpleadosPorHotelInputPort.listarEmpleadosPorHotel(id)) ;
+    }
 }
