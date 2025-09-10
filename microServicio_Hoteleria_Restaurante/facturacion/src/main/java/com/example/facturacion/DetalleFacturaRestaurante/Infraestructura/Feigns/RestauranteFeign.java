@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
-@FeignClient(name ="mcsv-restaurante", url = "http://localhost:8085")
+@FeignClient(name ="mcsv-restaurante", url = "http://44.223.54.192:8085")
 
 public interface RestauranteFeign {
 
