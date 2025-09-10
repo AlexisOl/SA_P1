@@ -38,9 +38,11 @@ public class CasoUsoGenerarFacturaDetallada implements GenerarFacturaDetalladaIn
 
         ReservacionResponseDTO  reservacionDeterminada = this.reservacionFeing.obtenerReservacionEspecifica(detalleFactura_Hotel.getId_reservacion());
 
+
+        //cambio de estado
+        this.reservacionFeing.cambiarEstadoReservacion(reservacionDeterminada.getId(), "PAGADA");
+
         // comprobar fechas
-        System.out.println(reservacionDeterminada.getHabitacion().getPrecio() + " ---"+reservacionDeterminada.getFechaEntrada()+ " ---"+ reservacionDeterminada.getFechaSalida());
-        System.out.println(detalleFactura_Hotel);
             return this.generarFacturaDetalladaOutputPort.GenerarFacturaDetallada(
                     new DetalleFactura_Hotel(
                             UUID.randomUUID(),
