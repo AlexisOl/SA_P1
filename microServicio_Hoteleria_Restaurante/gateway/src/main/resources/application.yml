@@ -58,6 +58,10 @@ spring:
           uri: http://44.223.54.192:8082
           predicates:
             - Path=/empleadoHotel/**
+        - id: empleado-restaurante-dev
+          uri: http://44.223.54.192:8082
+          predicates:
+            - Path=/empleadoRestaurante/**
         - id: factura-hotel-dev
           uri: http://44.223.54.192:8083
           predicates:
