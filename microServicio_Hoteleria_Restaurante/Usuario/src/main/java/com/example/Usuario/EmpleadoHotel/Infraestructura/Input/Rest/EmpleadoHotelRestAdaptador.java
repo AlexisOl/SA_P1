@@ -1,4 +1,4 @@
-package com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model;
+package com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest;
 
 
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.CrearEmpleadosHotelInputPort;
@@ -7,8 +7,6 @@ import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadosH
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Service.CrearEmpleadoHotel.CrearEmpleadoDTO;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Mapper.EmpleadoHotelRestMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model.Output.ResponseEmpleadoHotelDTO;
-import com.example.Usuario.clientes.Aplicacion.Service.CrearUsuario.crearUsuarioDTO;
-import com.example.Usuario.clientes.infraestructura.Adapters.Input.Rest.Model.Response.UsuarioResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
