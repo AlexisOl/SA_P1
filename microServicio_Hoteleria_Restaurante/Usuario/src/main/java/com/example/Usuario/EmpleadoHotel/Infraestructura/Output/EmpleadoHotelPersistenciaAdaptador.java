@@ -1,12 +1,10 @@
 package com.example.Usuario.EmpleadoHotel.Infraestructura.Output;
 
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.CrearEmpleadosHotelOutputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadoEspecificoHotelOutputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadosHotelOutputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadosPorHotelOutputPort;
+import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.*;
 import com.example.Usuario.EmpleadoHotel.Dominio.EmpleadoHotel;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Mapper.EmpleadoHotelMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Repository.EmpleadoHotelRepository;
+import com.example.Usuario.Persona.Dominio.Persona;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +15,8 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOutputPort,
-        ListarEmpleadosHotelOutputPort, ListarEmpleadoEspecificoHotelOutputPort, ListarEmpleadosPorHotelOutputPort {
+        ListarEmpleadosHotelOutputPort, ListarEmpleadoEspecificoHotelOutputPort, ListarEmpleadosPorHotelOutputPort,
+        EmpleadoHotelPorCuiOutputport {
 
     private EmpleadoHotelRepository empleadoHotelRepository;
     private EmpleadoHotelMapper empleadoHotelMapper;
@@ -50,6 +49,13 @@ public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOu
     public List<EmpleadoHotel> listarEmpleadosPorHotel(Long id) {
         return this.empleadoHotelMapper.toListEmpleadoHotel(
                 this.empleadoHotelRepository.findAllByIdhotel((id))
+        );
+    }
+
+    @Override
+    public EmpleadoHotel obtenerEmpleaado(Persona persona) {
+        return this.empleadoHotelMapper.toEmpleadoHotel(
+                this.empleadoHotelRepository.findByPersona_Cui(persona.getCui())
         );
     }
 }

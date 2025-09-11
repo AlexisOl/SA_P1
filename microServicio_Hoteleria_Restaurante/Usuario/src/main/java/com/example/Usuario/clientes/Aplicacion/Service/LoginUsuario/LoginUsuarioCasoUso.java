@@ -31,7 +31,7 @@ public class LoginUsuarioCasoUso implements LoginInputPort {
         if (usuario == null || !securityConfig.passwordEncoder().matches(loginUsuarioDTO.getPassword(), usuario.getPassword())) {
             throw new RuntimeException("Credenciales inválidas");
         }
-     
+
 
         return tokenProvider.generarToken(usuario);
     }

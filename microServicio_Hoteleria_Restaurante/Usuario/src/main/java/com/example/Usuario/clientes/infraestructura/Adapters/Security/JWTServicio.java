@@ -1,11 +1,16 @@
 package com.example.Usuario.clientes.infraestructura.Adapters.Security;
 
+import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.EmpleadoHotelPorCuiOutputport;
+import com.example.Usuario.EmpleadoHotel.Dominio.EmpleadoHotel;
+import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.EmpleadoRestaurantePorCuiOutputPort;
+import com.example.Usuario.EmpleadoRestaurante.Dominio.EmpleadoRestaurante;
 import com.example.Usuario.clientes.Dominio.Model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -23,6 +28,16 @@ public class JWTServicio {
     @Value("${spring.security.jwt.secret-expiration-time}")
     private long jwtExpiracion;
 
+    @Autowired
+    private final EmpleadoHotelPorCuiOutputport empleadoHotelPorCuiOutputport;
+
+    @Autowired
+    private final EmpleadoRestaurantePorCuiOutputPort empleadoRestaurantePorCuiOutputPort;
+
+    public JWTServicio(EmpleadoHotelPorCuiOutputport empleadoHotelPorCuiOutputport, EmpleadoRestaurantePorCuiOutputPort empleadoRestaurantePorCuiOutputPort) {
+        this.empleadoHotelPorCuiOutputport = empleadoHotelPorCuiOutputport;
+        this.empleadoRestaurantePorCuiOutputPort = empleadoRestaurantePorCuiOutputPort;
+    }
 
     public String extraerUsername(String token){
         return  extraerElementos(token, claims -> claims.get("username", String.class));
@@ -46,13 +61,21 @@ public class JWTServicio {
 
     private String construirToken(Map<String, Object> extraClaims, Usuario userDetails, Long tiempoExpiracion) {
 
-        System.out.println(userDetails.getTipoEmpleado()+ "--"+ userDetails.getUsername());
+        System.out.println(userDetails.getTipoEmpleado()+ "--"+ userDetails.getPersona().getCui());
+
+
+
+            // en caso de ser empleado buscar
+            EmpleadoHotel obtieneEmpleadoHotel = this.empleadoHotelPorCuiOutputport.obtenerEmpleaado(userDetails.getPersona());
+            EmpleadoRestaurante obtieneEmpleadoRestaurante = this.empleadoRestaurantePorCuiOutputPort.obtenerEmpleaado(userDetails.getPersona());
 
         Claims claims = Jwts.claims().setSubject(String.valueOf(userDetails.getId()));
         claims.put("id",userDetails.getId());
         claims.put("username",userDetails.getUsername());
         claims.put("password",userDetails.getPassword());
         claims.put("tipo",userDetails.getTipoEmpleado());
+        claims.put("id_RESTAURANTE", obtieneEmpleadoHotel!=null ?  obtieneEmpleadoHotel.getIdhotel(): "No tiene");
+        claims.put("id_HOTEL",obtieneEmpleadoRestaurante!=null ?  obtieneEmpleadoRestaurante.getRestauranteId(): "No tiene");
 
         return Jwts.builder()
                 .setClaims(claims)
