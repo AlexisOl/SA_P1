@@ -5,6 +5,7 @@ import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.CrearEmpleadosHo
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadoEspecificoHotelInputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadosHotelInputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadosPorHotelInputPort;
+import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.GeneracionPagosHotelOutputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Service.CrearEmpleadoHotel.CrearEmpleadoDTO;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Mapper.EmpleadoHotelRestMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model.Output.ResponseEmpleadoHotelDTO;
@@ -27,6 +28,7 @@ public class EmpleadoHotelRestAdaptador {
     private final ListarEmpleadoEspecificoHotelInputPort  listarEmpleadoEspecificoHotelInputPort;
     private final EmpleadoHotelRestMapper empleadoHotelRestMapper;
     private final ListarEmpleadosPorHotelInputPort listarEmpleadosPorHotelInputPort;
+    private final GeneracionPagosHotelOutputPort generacionPagosHotelOutputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -56,4 +58,5 @@ public class EmpleadoHotelRestAdaptador {
     public List<ResponseEmpleadoHotelDTO> listadoEmpleadosPorHotel(@PathVariable Long id) {
         return this.empleadoHotelRestMapper.toListResponseEmpleadoHotel(this.listarEmpleadosPorHotelInputPort.listarEmpleadosPorHotel(id)) ;
     }
+
 }

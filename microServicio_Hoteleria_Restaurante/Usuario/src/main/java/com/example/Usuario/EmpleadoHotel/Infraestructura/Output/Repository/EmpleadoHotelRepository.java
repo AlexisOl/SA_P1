@@ -3,8 +3,10 @@ package com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Repository;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Entity.EmpleadoHotelEntity;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Output.Entity.EmpleadoRestauranteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public interface EmpleadoHotelRepository extends JpaRepository<EmpleadoHotelEntity,Integer> {
@@ -13,5 +15,48 @@ public interface EmpleadoHotelRepository extends JpaRepository<EmpleadoHotelEnti
     List<EmpleadoHotelEntity> findAllByIdhotel(Long idhotel);
 
     EmpleadoHotelEntity findByPersona_Cui(Long personaCui);
+
+
+    @Query(
+            value = """
+        WITH RECURSIVE semanas AS (
+            SELECT YEAR(MIN(eh.fecha)) AS anio, WEEK(MIN(eh.fecha)) AS semana
+            FROM mcsv_usuario.empleado_hotel eh
+
+            UNION ALL
+
+            SELECT
+                CASE WHEN semana < 52 THEN anio ELSE anio + 1 END,
+                CASE WHEN semana < 52 THEN semana + 1 ELSE 1 END
+            FROM semanas
+            WHERE (anio < YEAR(CURDATE()))
+               OR (anio = YEAR(CURDATE()) AND semana < WEEK(CURDATE()))
+        ),
+
+        salarios AS (
+            SELECT
+                s.anio,
+                s.semana,
+                COALESCE(SUM(eh.salario / 4), 0) AS salario_semanal
+            FROM semanas s
+            LEFT JOIN mcsv_usuario.empleado_hotel eh
+                ON YEAR(eh.fecha) = s.anio AND WEEK(eh.fecha) = s.semana
+            GROUP BY s.anio, s.semana
+        )
+
+        SELECT
+            anio,
+            semana,
+            salario_semanal,
+            @running_total := @running_total + salario_semanal AS acumulado
+        FROM salarios
+        JOIN (SELECT @running_total := 0) AS vars
+        ORDER BY anio, semana;
+    """,
+            nativeQuery = true
+    )
+    List<Object> estimarPerdidaPagosEmpleado();
+
+
 
 }

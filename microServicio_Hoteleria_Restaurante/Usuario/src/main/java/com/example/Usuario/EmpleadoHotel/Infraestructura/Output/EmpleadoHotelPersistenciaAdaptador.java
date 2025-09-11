@@ -16,6 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOutputPort,
         ListarEmpleadosHotelOutputPort, ListarEmpleadoEspecificoHotelOutputPort, ListarEmpleadosPorHotelOutputPort,
+        GeneracionPagosHotelOutputPort,
         EmpleadoHotelPorCuiOutputport {
 
     private EmpleadoHotelRepository empleadoHotelRepository;
@@ -57,5 +58,10 @@ public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOu
         return this.empleadoHotelMapper.toEmpleadoHotel(
                 this.empleadoHotelRepository.findByPersona_Cui(persona.getCui())
         );
+    }
+
+    @Override
+    public List<Object> perdidasPagosHotel(Long id) {
+        return this.empleadoHotelRepository.estimarPerdidaPagosEmpleado();
     }
 }
