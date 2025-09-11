@@ -62,6 +62,6 @@ public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOu
 
     @Override
     public List<Object> perdidasPagosHotel(Long id) {
-        return this.empleadoHotelRepository.estimarPerdidaPagosEmpleado();
+        return this.empleadoHotelRepository.estimarPerdidaPagosEmpleado(id);
     }
 }

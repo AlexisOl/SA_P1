@@ -1,16 +1,14 @@
 package com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest;
 
 
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.CrearEmpleadosHotelInputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadoEspecificoHotelInputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadosHotelInputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.ListarEmpleadosPorHotelInputPort;
+import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Input.*;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.GeneracionPagosHotelOutputPort;
 import com.example.Usuario.EmpleadoHotel.Aplicacion.Service.CrearEmpleadoHotel.CrearEmpleadoDTO;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Mapper.EmpleadoHotelRestMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model.Output.ResponseEmpleadoHotelDTO;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.Generated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +26,7 @@ public class EmpleadoHotelRestAdaptador {
     private final ListarEmpleadoEspecificoHotelInputPort  listarEmpleadoEspecificoHotelInputPort;
     private final EmpleadoHotelRestMapper empleadoHotelRestMapper;
     private final ListarEmpleadosPorHotelInputPort listarEmpleadosPorHotelInputPort;
-    private final GeneracionPagosHotelOutputPort generacionPagosHotelOutputPort;
+    private final GeneracionPagosHotelnputPort generacionPagosHotelnputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,4 +57,8 @@ public class EmpleadoHotelRestAdaptador {
         return this.empleadoHotelRestMapper.toListResponseEmpleadoHotel(this.listarEmpleadosPorHotelInputPort.listarEmpleadosPorHotel(id)) ;
     }
 
+    @GetMapping("/pagos/{id}")
+    public List<Object> pruebaPerdidas(@PathVariable Long id) {
+        return (this.generacionPagosHotelnputPort.perdidasPagosHotel(id)) ;
+    }
 }
