@@ -74,8 +74,8 @@ public class JWTServicio {
         claims.put("username",userDetails.getUsername());
         claims.put("password",userDetails.getPassword());
         claims.put("tipo",userDetails.getTipoEmpleado());
-        claims.put("id_RESTAURANTE", obtieneEmpleadoHotel!=null ?  obtieneEmpleadoHotel.getIdhotel(): "No tiene");
-        claims.put("id_HOTEL",obtieneEmpleadoRestaurante!=null ?  obtieneEmpleadoRestaurante.getRestauranteId(): "No tiene");
+        claims.put("id_HOTEL",  obtieneEmpleadoHotel!=null ?  obtieneEmpleadoHotel.getIdhotel(): "No tiene");
+        claims.put("id_RESTAURANTE",obtieneEmpleadoRestaurante!=null ?  obtieneEmpleadoRestaurante.getRestauranteId(): "No tiene");
 
         return Jwts.builder()
                 .setClaims(claims)
