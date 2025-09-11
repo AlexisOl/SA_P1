@@ -12,9 +12,10 @@ public class FechaTrabajo {
 
 
     public FechaTrabajo(LocalDate fecha) {
-        if (fecha == null || !fecha.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException();
+        if (fecha == null || fecha.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("La fecha no puede ser anterior a hoy");
         }
         this.fecha = fecha;
     }
+
 }
