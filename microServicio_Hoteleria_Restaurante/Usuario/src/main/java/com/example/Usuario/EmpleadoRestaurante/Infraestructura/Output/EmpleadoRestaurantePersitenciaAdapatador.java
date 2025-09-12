@@ -2,6 +2,7 @@ package com.example.Usuario.EmpleadoRestaurante.Infraestructura.Output;
 
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.CrearEmpleadoRestauranteOutputPort;
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.EmpleadoRestaurantePorCuiOutputPort;
+import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.GeneracionPagosRestauranteOutputPort;
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.ListarEmpleadosRestaurantePorRestauranteOutPutPort;
 import com.example.Usuario.EmpleadoRestaurante.Dominio.EmpleadoRestaurante;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Output.Entity.EmpleadoRestauranteEntity;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class EmpleadoRestaurantePersitenciaAdapatador implements CrearEmpleadoRestauranteOutputPort, ListarEmpleadosRestaurantePorRestauranteOutPutPort,
-        EmpleadoRestaurantePorCuiOutputPort {
+        EmpleadoRestaurantePorCuiOutputPort , GeneracionPagosRestauranteOutputPort {
     private final EmpleadoRestauranteMapper empleadoRestauranteMapper;
     private final EmpleadoRestauranteRepository empleadoRestauranteRepository;
 
@@ -45,5 +46,11 @@ public class EmpleadoRestaurantePersitenciaAdapatador implements CrearEmpleadoRe
         return this.empleadoRestauranteMapper.toEmpleadoRestaurante(
                 this.empleadoRestauranteRepository.findByPersona_Cui(persona.getCui())
         );
+    }
+
+    @Override
+    public List<Object> perdidasPagosRestaurante(UUID id) {
+        return this.empleadoRestauranteRepository.estimarPerdidaPagosEmpleado(id);
+
     }
 }
