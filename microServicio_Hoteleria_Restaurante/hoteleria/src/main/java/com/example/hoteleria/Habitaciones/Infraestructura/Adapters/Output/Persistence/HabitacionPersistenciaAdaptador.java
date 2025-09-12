@@ -20,7 +20,8 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutputPortPersistence, ListarHaitacionesOutputPersistence ,
-        BuscarHabitacionOutputPort , HabitacionMejorPuntuadaOutputPort, HabitacionConMasAlojamientosOutputPort {
+        BuscarHabitacionOutputPort , HabitacionMejorPuntuadaOutputPort, HabitacionConMasAlojamientosOutputPort ,
+        ListadoGlobalHabitacionesOutputPort{
 
     private final HabitacionRepository habitacionRepository;
     private final HotelRepository hotelRepository;
@@ -59,5 +60,12 @@ public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutput
     @Override
     public Object habitacionMejorPuntuada(HabitacionConReservacionesDTO habitacion) {
         return habitacion;
+    }
+
+    @Override
+    public List<Habitacion> listaadoGlobal() {
+        return this.habitacionMapper.toHabitacionList(
+                this.habitacionRepository.findAll()
+        );
     }
 }

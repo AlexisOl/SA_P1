@@ -29,6 +29,7 @@ public class HabitacionesRestAdapter {
     private final CreacionHabitacionRestMapper creacionHabitacionRestMapper;
     private final HabitacionMejorPuntuadaInputPort habitacionMejorPuntuadaInputPort;
     private final HabitacionConMasAlojamientosInputPort habitacionConMasAlojamientosInputPort;
+private final ListadoGlobalHabitacionesInputPort listadoGlobalHabitacionesInputPort;
 
     @GetMapping("{hotel_id}")
     public List<ListarHabitacionesResponseDTO> allHabitacionesPorHotel(@Valid @PathVariable Long hotel_id) {
@@ -36,6 +37,10 @@ public class HabitacionesRestAdapter {
         return  this.creacionHabitacionRestMapper.toHabitacionesListaResponse(this.listarHabitacionesInputPort.listarHabitaciones(listarHabitacionesPorHotelDTO));
     }
 
+    @GetMapping()
+    public List<Habitacion> ListadoGlobal() {
+        return  this.listadoGlobalHabitacionesInputPort.listaadoGlobal();
+    }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
