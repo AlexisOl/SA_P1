@@ -47,7 +47,9 @@ public interface EmpleadoHotelRepository extends JpaRepository<EmpleadoHotelEnti
         anio,
         semana,
         salario_semanal,
-        @running_total := @running_total + salario_semanal AS acumulado
+        @running_total := @running_total + salario_semanal AS acumulado,
+        STR_TO_DATE(CONCAT(anio, semana, ' Monday'), '%X%V %W') AS inicio_semana,
+          DATE_ADD(STR_TO_DATE(CONCAT(anio, semana, ' Monday'), '%X%V %W'), INTERVAL 6 DAY) AS fin_semana
     FROM salarios
     JOIN (SELECT @running_total := 0) AS vars
     ORDER BY anio, semana;
