@@ -10,6 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 
 public interface PlatillosMapper {
+    @Mapping(source = "idrestaurante", target = "idrestaurante")
+
     Platillos toPlatillos(PlatillosEntity platillosEntity);
     @Mapping(source = "id", target = "id")
     @Mapping(source = "idrestaurante", target = "idrestaurante")

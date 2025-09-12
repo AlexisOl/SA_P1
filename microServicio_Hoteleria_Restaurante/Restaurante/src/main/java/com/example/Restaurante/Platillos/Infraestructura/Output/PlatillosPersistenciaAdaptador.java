@@ -1,7 +1,6 @@
 package com.example.Restaurante.Platillos.Infraestructura.Output;
 
 
-import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatilloEspecificoInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.CrearPlatilloOutputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.ListarPlatilloEspecificoOutputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.ListarPlatillosOutputPort;
@@ -34,11 +33,10 @@ public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort, 
     }
 
     @Override
-    public Optional<Platillos> listarPlatillosEspecificos(UUID id) {
-        return Optional.ofNullable(
+    public Platillos listarPlatillosEspecificos(UUID id) {
+        return
                 this.platillosMapper.toPlatillos(
                         this.platillosRepository.findById(id).get()
-                )
         );
     }
 

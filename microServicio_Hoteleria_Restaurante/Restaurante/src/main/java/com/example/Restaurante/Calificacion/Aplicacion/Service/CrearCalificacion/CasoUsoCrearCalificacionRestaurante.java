@@ -30,18 +30,18 @@ public class CasoUsoCrearCalificacionRestaurante  implements CrearCalificacionRe
         // aca comprobar que existe el platillo
 
         for (CrearCalificacionRestauranteDTO resenias: crearCalificacionRestauranteDTO){
-            Optional<Platillos> nuevoPlatillo = this.listarPlatilloEspecificoOutputPort.listarPlatillosEspecificos(resenias.getPlatillo());
-            if (!nuevoPlatillo.isPresent()){
+            Platillos nuevoPlatillo = this.listarPlatilloEspecificoOutputPort.listarPlatillosEspecificos(resenias.getPlatillo());
+            if (!(nuevoPlatillo==null)){
                 throw  new EntityNotFoundException("no existe el platillo");
             }
-            System.out.println(nuevoPlatillo.get().getNombre());
+            System.out.println(nuevoPlatillo.getNombre());
             // creacion
             this.crearCalificacionRestauranteOutputPort.createCalificacionRestaurante(
                     new CalificacionRestaurante(
                             UUID.randomUUID(),
                             resenias.getComentario(),
                             resenias.getPuntuacion(),
-                            nuevoPlatillo.get()
+                            nuevoPlatillo
                     )
             );
         }
