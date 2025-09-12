@@ -2,6 +2,7 @@ package com.example.Restaurante.Platillos.Infraestructura.Input.Rest;
 
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.CrearPlatilloInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatilloEspecificoInputPort;
+import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatillosGlobalesInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatillosInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Service.CasoUsoCrearPlatillo.CrearPlatilloDTO;
 import com.example.Restaurante.Platillos.Dominio.Platillos;
@@ -30,6 +31,7 @@ public class PlatillosRestAdaptador {
 
     private final ListarPlatillosInputPort listarPlatillosInputPort;
     private final ListarPlatilloEspecificoInputPort  listarPlatilloEspecificoInputPort;
+    private final ListarPlatillosGlobalesInputPort listarPlatillosGlobalesInputPort;
 
 
     @PostMapping()
@@ -47,6 +49,11 @@ public class PlatillosRestAdaptador {
 
     }
 
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public List<ResponsePlatillosDTO> listarPlatillosGloables() {
+        return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosGlobalesInputPort.listarPlatillosGlobales());
+    }
 
     @GetMapping("/restaurante/{id}")
     @ResponseStatus(HttpStatus.OK)
