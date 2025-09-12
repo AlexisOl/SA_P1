@@ -53,7 +53,7 @@ public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutput
 
     @Override
     public Object habitacionConMasAlojamientos(HabitacionConReservacionesDTO habitacion) {
-        return null;
+        return habitacion;
     }
 
     @Override

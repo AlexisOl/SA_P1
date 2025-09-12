@@ -17,7 +17,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputPort, ExistenciaHabitacionesEnEsperaId,
         ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput, ListarReservacionesHotelOutputPort,
-        CambiarEstadoReservacionOutputPort, ListarResrevacionesPorHabitacionEspecificaOutputPort{
+        CambiarEstadoReservacionOutputPort, ListarResrevacionesPorHabitacionEspecificaOutputPort,
+IDHabitacionConMasReservacionesOutputPort{
 
     private final ReservacionMapper reservacionMapper;
     private final ReservacionRepository reservacionRepository;
@@ -72,5 +73,10 @@ public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputP
         return this.reservacionMapper.toReservacionList(
                 this.reservacionRepository.findAllByHabitacion_Id((id)
         ));
+    }
+
+    @Override
+    public UUID obtenerHabitacionConMasAlojamientos() {
+        return this.reservacionRepository.habitacionConMasAlojamientos();
     }
 }

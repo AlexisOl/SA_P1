@@ -2,10 +2,7 @@ package com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest;
 
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.CrearHabitacionDTO;
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.ListarHabitaciones.ListarHabitacionesPorHotelDTO;
-import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.BuscarHabitacionInputPort;
-import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.CreacionHabitacionInputPort;
-import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.HabitacionMejorPuntuadaInputPort;
-import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.ListarHabitacionesInputPort;
+import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.*;
 import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Mapper.CreacionHabitacionRestMapper;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Input.Rest.Model.Response.BuscarHabitacionResponseDTO;
@@ -31,6 +28,7 @@ public class HabitacionesRestAdapter {
     private final BuscarHabitacionInputPort buscarHabitacionInputPort;
     private final CreacionHabitacionRestMapper creacionHabitacionRestMapper;
     private final HabitacionMejorPuntuadaInputPort habitacionMejorPuntuadaInputPort;
+    private final HabitacionConMasAlojamientosInputPort habitacionConMasAlojamientosInputPort;
 
     @GetMapping("{hotel_id}")
     public List<ListarHabitacionesResponseDTO> allHabitacionesPorHotel(@Valid @PathVariable Long hotel_id) {
@@ -60,5 +58,10 @@ public class HabitacionesRestAdapter {
     @GetMapping("/habitacionMejorPuntuada")
     public Object habitacionMejorPuntuada() {
         return  (this.habitacionMejorPuntuadaInputPort.habitacionMejorPuntuada());
+    }
+
+    @GetMapping("/habitacionConMasAlojamientos")
+    public Object habitacionConMasAlojamientos() {
+        return  (this.habitacionConMasAlojamientosInputPort.habitacionConMasAlojamientos());
     }
 }
