@@ -27,6 +27,7 @@ public class EmpleadoHotelRestAdaptador {
     private final EmpleadoHotelRestMapper empleadoHotelRestMapper;
     private final ListarEmpleadosPorHotelInputPort listarEmpleadosPorHotelInputPort;
     private final GeneracionPagosHotelnputPort generacionPagosHotelnputPort;
+    private final ReporteDetalleEmpleadoHotelInputPort ReporteDetalleEmpleadoHotelInputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -60,5 +61,11 @@ public class EmpleadoHotelRestAdaptador {
     @GetMapping("/pagos/{id}")
     public List<Object> pruebaPerdidas(@PathVariable Long id) {
         return (this.generacionPagosHotelnputPort.perdidasPagosHotel(id)) ;
+    }
+
+
+    @GetMapping("/reportePagosUsuario/{id}")
+    public List<Object> reportePagosEmpleado(@PathVariable UUID id) {
+        return (this.ReporteDetalleEmpleadoHotelInputPort.detalleEmpleadoHotelReporteDTO(id)) ;
     }
 }
