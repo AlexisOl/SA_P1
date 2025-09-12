@@ -1,9 +1,8 @@
 package com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Input.Rest;
 
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Input.GenerarFacturaDetalladaInputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Input.ListarFacturaReservacionEspecificaInputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Input.ListarFacturasDetalladasInputPort;
+import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Input.*;
 import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Service.GenerarFactura.GenerarFacturaDTO;
+import com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor.Ganancias;
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Input.Rest.Mapper.CreacionDetalleFacturaRestMapper;
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Input.Rest.Model.Response.DetalleFacturaResponseDTO;
 import jakarta.validation.Valid;
@@ -23,6 +22,7 @@ public class DetalleFacturaRestAdapter {
     private final ListarFacturasDetalladasInputPort listarFacturasDetalladasInputPort;
     private final CreacionDetalleFacturaRestMapper creacionDetalleFacturaRestMapper;
     private final ListarFacturaReservacionEspecificaInputPort  listarFacturaReservacionEspecificaInputPort;
+    private final GanaciasHistoricasInputPort ganaciasHistoricasInputPort;
 
 
     @PostMapping()
@@ -42,5 +42,12 @@ public class DetalleFacturaRestAdapter {
     @GetMapping("/{id}")
     public DetalleFacturaResponseDTO FacturaDetalleFacturaEspecificaHotel(@PathVariable UUID id) {
         return  this.creacionDetalleFacturaRestMapper.toDetalleFacturaResponseDTO(this.listarFacturaReservacionEspecificaInputPort.obtenerDetalleFacturacionEspecifica(id));
+    }
+
+
+
+    @GetMapping("/generarGanancias/{id}")
+    public List<Ganancias> generarGanancias(@PathVariable Long id) {
+        return  (this.ganaciasHistoricasInputPort.gananciasHistoricas(id));
     }
 }

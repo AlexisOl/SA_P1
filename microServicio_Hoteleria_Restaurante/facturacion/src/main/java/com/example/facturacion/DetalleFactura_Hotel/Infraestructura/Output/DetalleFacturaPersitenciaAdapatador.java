@@ -1,9 +1,8 @@
 package com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Output;
 
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.GenerarFacturaDetalladaOutputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.ListarFacturaReservacionEspecificaOutputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.ListarFacturasDetalladasOutputPort;
+import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.*;
 import com.example.facturacion.DetalleFactura_Hotel.Dominio.DetalleFactura_Hotel;
+import com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor.Ganancias;
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Output.Mapper.DetalleFacturaMapper;
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Output.Repository.DetalleFacturaRepository;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,7 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class DetalleFacturaPersitenciaAdapatador implements GenerarFacturaDetalladaOutputPort, ListarFacturasDetalladasOutputPort,
-        ListarFacturaReservacionEspecificaOutputPort {
+        ListarFacturaReservacionEspecificaOutputPort, GenerarGananciasOutputPort {
 
     private final DetalleFacturaRepository detalleFacturaRepository;
     private final DetalleFacturaMapper detalleFacturaMapper;
@@ -45,4 +44,11 @@ public class DetalleFacturaPersitenciaAdapatador implements GenerarFacturaDetall
                 this.detalleFacturaRepository.findById_reservacion(id).get().getFecha());
         return (this.detalleFacturaMapper.toDetalleFactura_Hotel(this.detalleFacturaRepository.findById_reservacion(id).get()));
     }
+
+    @Override
+    public List<Object[]> gananciasHistoricas(Long id) {
+        return this.detalleFacturaRepository.gananciasHistoricas(id);
+    }
+
+
 }
