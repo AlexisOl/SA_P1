@@ -8,7 +8,9 @@ import com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor.Ganan
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Feigns.UsuariosFeing;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -25,17 +27,27 @@ public class CasoUsoGenerarGanancias implements GanaciasHistoricasInputPort {
     }
     @Override
     public List<Ganancias> gananciasHistoricas(Long id) {
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //generacion de pagos
         List<Ganancias> elementos = new ArrayList<>();
 
         for (Object[] pagos: this.usuariosFeing.pagosEmpleado(id) ){
+            String inicioStr = (String) pagos[4];
+            String finStr = (String) pagos[5];
+
+            LocalDate inicioLocal = LocalDate.parse(inicioStr, formatter);
+            LocalDate finLocal = LocalDate.parse(finStr, formatter);
+
+            Date inicio = java.sql.Date.valueOf(inicioLocal);
+            Date fin = java.sql.Date.valueOf(finLocal);
+
+            System.out.println(pagos[4]+"---"+pagos[5]);
             elementos.add(new Ganancias(
                     (Integer) pagos[0],
                     (Integer) pagos[1],
                     (Double) pagos[3],
-                    new Date(),
-                    new Date()
+                    inicio,
+                    fin
             ));
         }
 
