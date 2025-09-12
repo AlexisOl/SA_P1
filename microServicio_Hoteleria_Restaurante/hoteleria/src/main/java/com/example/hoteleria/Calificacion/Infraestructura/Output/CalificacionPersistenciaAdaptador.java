@@ -2,6 +2,7 @@ package com.example.hoteleria.Calificacion.Infraestructura.Output;
 
 import com.example.hoteleria.Calificacion.Aplicacion.Ports.Output.CrearCalificacionOutputPort;
 import com.example.hoteleria.Calificacion.Aplicacion.Ports.Output.ListarCalificacionesOutputPort;
+import com.example.hoteleria.Calificacion.Aplicacion.Ports.Output.ObtenerHabitacionConMejorPuntuacionOutputPort;
 import com.example.hoteleria.Calificacion.Aplicacion.Ports.Output.PromedioValoracionHabitacion;
 import com.example.hoteleria.Calificacion.Dominio.Calificacion;
 import com.example.hoteleria.Calificacion.Infraestructura.Output.Entity.CalificacionEntity;
@@ -15,7 +16,8 @@ import java.util.UUID;
 
 @Component
 @AllArgsConstructor
-public class CalificacionPersistenciaAdaptador implements CrearCalificacionOutputPort, PromedioValoracionHabitacion, ListarCalificacionesOutputPort {
+public class CalificacionPersistenciaAdaptador implements CrearCalificacionOutputPort, PromedioValoracionHabitacion, ListarCalificacionesOutputPort,
+        ObtenerHabitacionConMejorPuntuacionOutputPort {
 
 
     private final CalificacionRepository calificacionRepository;
@@ -49,5 +51,10 @@ public class CalificacionPersistenciaAdaptador implements CrearCalificacionOutpu
         return this.calificacionMapper.toCalificacionList(
                 this.calificacionRepository.findAllByReservacion_Habitacion_Id(id)
         );
+    }
+
+    @Override
+    public UUID obtenerHabitacionConMejorPuntuacion() {
+        return this.calificacionRepository.findHabitacionMejorPuntuada();
     }
 }

@@ -1,6 +1,9 @@
 package com.example.hoteleria.Hotel.Infraestructura.Adapters.Input.Rest;
 
 
+import com.example.hoteleria.Hotel.Aplicacion.Ports.In.BuscarPorIdInputPort;
+import com.example.hoteleria.Hotel.Aplicacion.Ports.In.BuscarTodoInputPort;
+import com.example.hoteleria.Hotel.Aplicacion.Ports.In.CrearHotelInputPort;
 import com.example.hoteleria.Hotel.Aplicacion.Ports.In.HotelServicioPuerto;
 import com.example.hoteleria.Hotel.Dominio.Models.Hotel;
 import com.example.hoteleria.Hotel.Infraestructura.Adapters.Input.Rest.Mapper.HotelRestMapper;
@@ -22,6 +25,9 @@ public class HotelRestAdapter {
 
     private final HotelRestMapper restMapper;
     private final HotelServicioPuerto servicioPuerto;
+    //private final BuscarTodoInputPort buscarTodoInputPort;
+    //private final CrearHotelInputPort crearHotelInputPort;
+    //private final BuscarPorIdInputPort  buscarPorIdInputPort;
 
 
     @GetMapping()

@@ -15,4 +15,14 @@ public interface CalificacionRepository extends JpaRepository<CalificacionEntity
 
     List<CalificacionEntity> findAllByReservacion_Habitacion_Id(UUID reservacionHabitacionId);
 
+    @Query("""
+    SELECT c.reservacion.habitacion.id
+    FROM CalificacionEntity c
+    GROUP BY c.reservacion.habitacion.id
+    ORDER BY AVG(c.puntuacion) DESC
+    LIMIT  1
+""")
+    UUID findHabitacionMejorPuntuada();
+
+
 }
