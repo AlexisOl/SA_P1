@@ -8,6 +8,7 @@ import com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor.Ganan
 import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Feigns.UsuariosFeing;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -32,7 +33,9 @@ public class CasoUsoGenerarGanancias implements GanaciasHistoricasInputPort {
             elementos.add(new Ganancias(
                     (Integer) pagos[0],
                     (Integer) pagos[1],
-                    (Double) pagos[3]
+                    (Double) pagos[3],
+                    new Date(),
+                    new Date()
             ));
         }
 
@@ -42,7 +45,9 @@ public class CasoUsoGenerarGanancias implements GanaciasHistoricasInputPort {
             elementosGanancias.add(new Ganancias(
                     (Integer) pagos[0],
                     (Integer) pagos[1],
-                    (Double) pagos[2]
+                    (Double) pagos[2],
+            (Date) pagos[3],
+            (Date) pagos[4]
             ));
         }
 

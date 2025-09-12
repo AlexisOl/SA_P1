@@ -40,7 +40,9 @@ public interface DetalleFacturaRepository extends JpaRepository<DetalleFacturaEn
             SELECT
               anio,
               semana,
-              salario_semanal
+              salario_semanal,
+              STR_TO_DATE(CONCAT(anio, semana, ' Monday'), '%X%V %W') AS inicio_semana,
+             DATE_ADD(STR_TO_DATE(CONCAT(anio, semana, ' Monday'), '%X%V %W'), INTERVAL 6 DAY) AS fin_semana
             FROM salarios
             ORDER BY anio, semana;
         """,

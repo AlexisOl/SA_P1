@@ -1,14 +1,21 @@
 package com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Ganancias {
     private  int anio;
     private  int semana;
     private  double acumulado;
+    private Date inicio_semana;
+    private Date fin_semana;
 
-    public Ganancias(int anio, int semana, double acumulado) {
+    public Ganancias(int anio, int semana, double acumulado, Date inicio_semana, Date fin_semana) {
         this.anio = anio;
         this.semana = semana;
         this.acumulado = acumulado;
+        this.inicio_semana = inicio_semana;
+        this.fin_semana = fin_semana;
     }
 
     public int getAnio() {
@@ -36,5 +43,20 @@ public class Ganancias {
 
     public void setSemana(int semana) {
         this.semana = semana;
+    }
+
+    public void setInicio_semana(Date inicio_semana) {
+        this.inicio_semana = inicio_semana;
+    }
+    public void setFin_semana(Date fin_semana) {
+        this.fin_semana = fin_semana;
+    }
+
+    public Date getInicio_semana() {
+        return inicio_semana;
+    }
+
+    public Date getFin_semana() {
+        return fin_semana;
     }
 }
