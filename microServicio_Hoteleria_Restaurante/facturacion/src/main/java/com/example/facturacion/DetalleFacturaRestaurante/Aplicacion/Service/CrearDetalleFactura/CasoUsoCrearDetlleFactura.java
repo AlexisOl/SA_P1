@@ -5,8 +5,10 @@ import com.example.facturacion.DetalleFacturaRestaurante.Aplicacion.Ports.Output
 import com.example.facturacion.DetalleFacturaRestaurante.Dominio.DetalleFacturaRestaurante;
 import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns.DTO.PlatillosResponseDTO;
 import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns.RestauranteFeign;
+import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.ActualizarFactura;
 import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.CrearFacturaRestauranteOutputPort;
 import com.example.facturacion.Factura_Restaurante.Dominio.FacturaRestaurante;
+import com.example.facturacion.Factura_Restaurante.Dominio.ObjetosValor.PrecioFactura;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,17 +20,21 @@ public class CasoUsoCrearDetlleFactura implements CrearDetlleFacturaInputPort {
     private final CrearDetlleFacturaOutputPort crearDetlleFacturaOutputPort;
     private final CrearFacturaRestauranteOutputPort crearFacturaRestauranteOutputPort;
     private final RestauranteFeign restauranteFeign;
+    private final ActualizarFactura actualizarFactura;
 
     public CasoUsoCrearDetlleFactura(CrearDetlleFacturaOutputPort crearDetlleFacturaOutputPort,
                                      RestauranteFeign restauranteFeign,
-                                     CrearFacturaRestauranteOutputPort crearFacturaRestauranteOutputPort) {
+                                     CrearFacturaRestauranteOutputPort crearFacturaRestauranteOutputPort,
+                                     ActualizarFactura actualizarFactura) {
         this.crearDetlleFacturaOutputPort = crearDetlleFacturaOutputPort;
         this.restauranteFeign = restauranteFeign;
         this.crearFacturaRestauranteOutputPort = crearFacturaRestauranteOutputPort;
+        this.actualizarFactura=actualizarFactura;
     }
     @Override
     public DetalleFacturaRestaurante createDetalleFacturaRestaurante(CrearDetlleFacturaDTO detlleFacturaDTO) {
         List listadoPlatillos = new ArrayList();
+        double precioTotal = 0.0;
         HashMap<PlatillosResponseDTO, Long> platillosFinal = new HashMap<>();
 
 
@@ -69,8 +75,14 @@ public class CasoUsoCrearDetlleFactura implements CrearDetlleFacturaInputPort {
                     )
             );
 
+            precioTotal+=platillosEspecifico.getValue()*platillosEspecifico.getKey().getPrecio();
+
         }
 
+
+    // todo bien actualiza el precio
+        nuevaFacturaRestaurante.setPrecioTotal(new PrecioFactura(precioTotal));
+        this.actualizarFactura.actualizar(nuevaFacturaRestaurante);
         return null;
     }
 }

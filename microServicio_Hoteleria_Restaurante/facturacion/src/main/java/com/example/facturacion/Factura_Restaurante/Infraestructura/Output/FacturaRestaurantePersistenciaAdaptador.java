@@ -1,5 +1,6 @@
 package com.example.facturacion.Factura_Restaurante.Infraestructura.Output;
 
+import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.ActualizarFactura;
 import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.CrearFacturaRestauranteOutputPort;
 import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.ListarFacturasUsuarioOutputPort;
 import com.example.facturacion.Factura_Restaurante.Dominio.FacturaRestaurante;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 @Component
 @AllArgsConstructor
-public class FacturaRestaurantePersistenciaAdaptador implements CrearFacturaRestauranteOutputPort, ListarFacturasUsuarioOutputPort {
+public class FacturaRestaurantePersistenciaAdaptador implements CrearFacturaRestauranteOutputPort, ListarFacturasUsuarioOutputPort, ActualizarFactura {
 
     private final FacturaRestauranteRepository facturaRestauranteRepository;
     private final FacturaRestauranteMapper facturaRestauranteMapper;
@@ -30,6 +31,15 @@ public class FacturaRestaurantePersistenciaAdaptador implements CrearFacturaRest
     public List<FacturaRestaurante> listarFacturas(UUID idUsuario) {
         return this.facturaRestauranteMapper.toListFacturaRestaurante(
                 this.facturaRestauranteRepository.findAllByCliente(idUsuario)
+        );
+    }
+
+    @Override
+    public FacturaRestaurante actualizar(FacturaRestaurante facturaRestaurante) {
+        return this.facturaRestauranteMapper.toFacturaRestaurante(
+                this.facturaRestauranteRepository.save(
+                        this.facturaRestauranteMapper.toFAFacturaRestauranteEntity(facturaRestaurante)
+                )
         );
     }
 }
