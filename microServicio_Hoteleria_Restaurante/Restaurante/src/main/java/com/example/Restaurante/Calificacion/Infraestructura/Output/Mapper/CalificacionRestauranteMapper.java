@@ -5,6 +5,8 @@ import com.example.Restaurante.Calificacion.Infraestructura.Output.Entity.Califi
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface CalificacionRestauranteMapper {
     @Mapping(source = "platillo", target = "platillo")
@@ -12,4 +14,7 @@ public interface CalificacionRestauranteMapper {
 
     @Mapping(source = "platillo", target = "platillo")
     CalificacionRestauranteEntity toCalificacionRestauranteEntity(CalificacionRestaurante calificacionRestaurante);
+
+
+    List<CalificacionRestaurante> toCalificacionRestauranteList(List<CalificacionRestauranteEntity>  calificacionRestauranteEntities);
 }
