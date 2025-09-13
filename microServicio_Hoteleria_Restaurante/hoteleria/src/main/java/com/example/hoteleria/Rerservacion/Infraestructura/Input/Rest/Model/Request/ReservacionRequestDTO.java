@@ -16,6 +16,6 @@ public class ReservacionRequestDTO {
     private LocalDate fechaSalida;
     private UUID id_habitacion;
     private UUID idusuario;
-    private TipoReservacion tipoReservacion;
+    private String tipoReservacion;
 
 }

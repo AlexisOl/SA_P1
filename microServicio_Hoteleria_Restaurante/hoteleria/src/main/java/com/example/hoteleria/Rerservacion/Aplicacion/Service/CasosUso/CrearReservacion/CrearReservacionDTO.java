@@ -16,6 +16,6 @@ public class CrearReservacionDTO {
     private LocalDate fechaEntrada;
     private LocalDate fechaSalida;
     private UUID habitacion;
-    private TipoReservacion tipoReservacion;
+    private String tipoReservacion;
     private UUID idusuario;
 }

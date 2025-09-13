@@ -15,9 +15,11 @@ public interface CreacionReservacionMapperRest {
     // creacion
     Reservacion toReservacion(ReservacionRequestDTO reservacionRequestDTO);
     @Mapping(source = "idusuario", target = "idusuario")
+    @Mapping(target = "tipoReservacion", source = "tipoReservacion")
 
     ReservacionResponseDTO toReservacionResponseDTO(Reservacion reservacion);
 
+    @Mapping(target = "tipoReservacion", source = "tipoReservacion")
 
     List<ReservacionResponseDTO> toListReservacionResponseDTO(List<Reservacion> reservacion);
 }
