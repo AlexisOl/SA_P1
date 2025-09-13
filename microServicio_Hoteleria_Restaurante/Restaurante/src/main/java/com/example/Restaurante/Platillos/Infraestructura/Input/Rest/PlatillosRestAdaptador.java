@@ -2,6 +2,7 @@ package com.example.Restaurante.Platillos.Infraestructura.Input.Rest;
 
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.CrearPlatilloInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatilloEspecificoInputPort;
+import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatillosGlobalesInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatillosInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Service.CasoUsoCrearPlatillo.CrearPlatilloDTO;
 import com.example.Restaurante.Platillos.Dominio.Platillos;
@@ -30,6 +31,7 @@ public class PlatillosRestAdaptador {
 
     private final ListarPlatillosInputPort listarPlatillosInputPort;
     private final ListarPlatilloEspecificoInputPort  listarPlatilloEspecificoInputPort;
+    private final ListarPlatillosGlobalesInputPort listarPlatillosGlobalesInputPort;
 
 
     @PostMapping()
@@ -47,18 +49,23 @@ public class PlatillosRestAdaptador {
 
     }
 
-
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<ResponsePlatillosDTO> listarPlatillos() {
-        return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosInputPort.listarPlatillos());
+    public List<ResponsePlatillosDTO> listarPlatillosGloables() {
+        return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosGlobalesInputPort.listarPlatillosGlobales());
+    }
+
+    @GetMapping("/restaurante/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ResponsePlatillosDTO> listarPlatillos(@PathVariable UUID id) {
+        return this.platillosRestMapper.toListPlatillosResponse(this.listarPlatillosInputPort.listarPlatillos(id));
     }
 
 
     @GetMapping("/{id}")
     public ResponsePlatillosDTO listarPlatilloEspecifico(@PathVariable UUID id) {
         Platillos platillos = this.listarPlatilloEspecificoInputPort
-                .listarPlatillos(id)
+                .listarPlatillosEspecifico(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Restaurante no encontrado con id: " + id
                 ));

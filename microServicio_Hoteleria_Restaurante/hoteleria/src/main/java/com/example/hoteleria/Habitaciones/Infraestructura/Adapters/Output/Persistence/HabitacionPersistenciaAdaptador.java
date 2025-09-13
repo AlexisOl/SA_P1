@@ -2,11 +2,10 @@ package com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persi
 
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.BuscarHabitacionId.CasoUsoBuscarHabitacionId;
 import com.example.hoteleria.Habitaciones.Aplicacion.Service.CrearHabitacion.CrearHabitacionDTO;
-import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.BuscarHabitacionOutputPort;
-import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.CreacionHabitacionOutputPortPersistence;
-import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.ListarHaitacionesOutputPersistence;
+import com.example.hoteleria.Habitaciones.Aplicacion.ports.Output.*;
 import com.example.hoteleria.Habitaciones.Aplicacion.ports.input.CreacionHabitacionInputPort;
 import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
+import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.DTO.HabitacionConReservacionesDTO;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence.Mapper.HabitacionMapper;
 import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persistence.Repository.HabitacionRepository;
 import com.example.hoteleria.Hotel.Infraestructura.Adapters.Output.Persistence.HotelPersistenciaAdaptador;
@@ -21,7 +20,8 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutputPortPersistence, ListarHaitacionesOutputPersistence ,
-        BuscarHabitacionOutputPort {
+        BuscarHabitacionOutputPort , HabitacionMejorPuntuadaOutputPort, HabitacionConMasAlojamientosOutputPort ,
+        ListadoGlobalHabitacionesOutputPort{
 
     private final HabitacionRepository habitacionRepository;
     private final HotelRepository hotelRepository;
@@ -50,5 +50,22 @@ public class HabitacionPersistenciaAdaptador implements CreacionHabitacionOutput
         return habitacionRepository.findById(id_habitacion)
                 .map(habitacionMapper::toHabitacion)
                 .orElse(null);
+    }
+
+    @Override
+    public Object habitacionConMasAlojamientos(HabitacionConReservacionesDTO habitacion) {
+        return habitacion;
+    }
+
+    @Override
+    public Object habitacionMejorPuntuada(HabitacionConReservacionesDTO habitacion) {
+        return habitacion;
+    }
+
+    @Override
+    public List<Habitacion> listaadoGlobal() {
+        return this.habitacionMapper.toHabitacionList(
+                this.habitacionRepository.findAll()
+        );
     }
 }

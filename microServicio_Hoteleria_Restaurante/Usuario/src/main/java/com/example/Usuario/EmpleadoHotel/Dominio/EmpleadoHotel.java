@@ -16,6 +16,7 @@ public class EmpleadoHotel {
     private Long idhotel;
     private Double salario;
     private FechaTrabajo fecha;
+    private Boolean estado;
 
 
     public EmpleadoHotel(UUID id, Persona persona, Long idhotel, Double salario, FechaTrabajo fecha) {
@@ -24,5 +25,6 @@ public class EmpleadoHotel {
         this.idhotel = idhotel;
         this.salario = salario;
         this.fecha = fecha;
+        this.estado = true;
     }
 }

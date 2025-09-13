@@ -1,11 +1,10 @@
 package com.example.Usuario.EmpleadoHotel.Infraestructura.Output;
 
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.CrearEmpleadosHotelOutputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadoEspecificoHotelOutputPort;
-import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.ListarEmpleadosHotelOutputPort;
+import com.example.Usuario.EmpleadoHotel.Aplicacion.Ports.Output.*;
 import com.example.Usuario.EmpleadoHotel.Dominio.EmpleadoHotel;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Mapper.EmpleadoHotelMapper;
 import com.example.Usuario.EmpleadoHotel.Infraestructura.Output.Repository.EmpleadoHotelRepository;
+import com.example.Usuario.Persona.Dominio.Persona;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,9 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOutputPort,
-        ListarEmpleadosHotelOutputPort, ListarEmpleadoEspecificoHotelOutputPort {
+        ListarEmpleadosHotelOutputPort, ListarEmpleadoEspecificoHotelOutputPort, ListarEmpleadosPorHotelOutputPort,
+        GeneracionPagosHotelOutputPort, ReporteDetalleEmpleadoHotelOutputPort,
+        EmpleadoHotelPorCuiOutputport {
 
     private EmpleadoHotelRepository empleadoHotelRepository;
     private EmpleadoHotelMapper empleadoHotelMapper;
@@ -43,5 +44,29 @@ public class EmpleadoHotelPersistenciaAdaptador implements CrearEmpleadosHotelOu
     @Override
     public List<EmpleadoHotel> listarEmpleadosHotel() {
         return this.empleadoHotelMapper.toListEmpleadoHotel(this.empleadoHotelRepository.findAll());
+    }
+
+    @Override
+    public List<EmpleadoHotel> listarEmpleadosPorHotel(Long id) {
+        return this.empleadoHotelMapper.toListEmpleadoHotel(
+                this.empleadoHotelRepository.findAllByIdhotel((id))
+        );
+    }
+
+    @Override
+    public EmpleadoHotel obtenerEmpleaado(Persona persona) {
+        return this.empleadoHotelMapper.toEmpleadoHotel(
+                this.empleadoHotelRepository.findByPersona_Cui(persona.getCui())
+        );
+    }
+
+    @Override
+    public List<Object> perdidasPagosHotel(Long id) {
+        return this.empleadoHotelRepository.estimarPerdidaPagosEmpleado(id);
+    }
+
+    @Override
+    public List<Object> detalleEmpleadoHotelReporteDTO(UUID id) {
+        return this.empleadoHotelRepository.estimarPagosEmpleadoEspecifico(id);
     }
 }

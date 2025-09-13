@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ListarPlatillosInputPort {
-    List<Platillos> listarPlatillos();
+    List<Platillos> listarPlatillos(UUID id);
 }

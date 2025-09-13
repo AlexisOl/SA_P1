@@ -43,18 +43,20 @@ public class UsuarioPersistenceAdapter implements CreacionUsuarioOutputPersitenc
     }
 
     @Override
+    @Transactional
+
     public String login(Usuario loginUsuarioDTO) {
         Usuario usuario = usuarioRepository.findByUsername(loginUsuarioDTO.getUsername())
                 .map(usuarioPersistenceMapper::toPUssuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
 
-//        if (!securityConfig.passwordEncoder().matches(loginUsuarioDTO.getPassword(), usuario.getPassword())) {
-//            throw new RuntimeException("Contraseña incorrecta");
-//        }
-        if (!(loginUsuarioDTO.getPassword().equals(usuario.getPassword()) )) {
+        if (!securityConfig.passwordEncoder().matches(loginUsuarioDTO.getPassword(), usuario.getPassword())) {
             throw new RuntimeException("Contraseña incorrecta");
         }
+//        if (!(loginUsuarioDTO.getPassword().equals(usuario.getPassword()) )) {
+//            throw new RuntimeException("Contraseña incorrecta");
+//        }
 
         System.out.println(usuario.getTipoEmpleado()+ "--"+ usuario.getUsername());
         String token = jwtServicio.obtenerToken(usuario);

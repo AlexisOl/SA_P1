@@ -11,4 +11,6 @@ import java.util.UUID;
 @Repository
 public interface HabitacionRepository extends JpaRepository<HabitacionEntity, UUID> {
     List<HabitacionEntity> findAllByHotel_Id(Long hotelId);
+
+
 }

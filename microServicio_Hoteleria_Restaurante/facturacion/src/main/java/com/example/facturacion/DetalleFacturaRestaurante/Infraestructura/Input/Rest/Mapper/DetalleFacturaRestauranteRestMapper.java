@@ -5,10 +5,13 @@ import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Input.R
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "Spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 
 public interface DetalleFacturaRestauranteRestMapper {
 
 
     ResponseDetalleFacturaRestauranteDTO toDetalleFacturaRestauranteDTO(DetalleFacturaRestaurante detalleFacturaRestaurante);
+    List<ResponseDetalleFacturaRestauranteDTO> toListDetalleFacturaRestauranteDTO(List<DetalleFacturaRestaurante> detalleFacturaRestaurante);
 }

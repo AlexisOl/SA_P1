@@ -16,8 +16,9 @@ import java.util.List;
 
 public interface PlatillosRestMapper {
  //   Platillos toPlatillos(RequestPlatillosDTO requestPlatillosDTO);
+ @Mapping(source = "promedio_valoracion", target = "promedio_valoracion")
     ResponsePlatillosDTO toResponsePlatillosDTO(Platillos platillos );
-
+    @Mapping(source = "promedio_valoracion", target = "promedio_valoracion")
     List<ResponsePlatillosDTO> toListPlatillosResponse(List<Platillos> platillos);
 
 }

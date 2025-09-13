@@ -15,5 +15,6 @@ public class ReservacionResponseDTO {
     private LocalDate fechaEntrada;
     private LocalDate fechaSalida;
     private HabitacionDTO habitacion;
+    private String tipoReservacion;
     private UUID idusuario;
 }

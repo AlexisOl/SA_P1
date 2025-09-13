@@ -6,6 +6,8 @@ import com.example.Restaurante.Platillos.Infraestructura.Input.Rest.Model.Input.
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "Spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 
 public interface CalificacionRestauranteRestMapper {
@@ -14,4 +16,5 @@ public interface CalificacionRestauranteRestMapper {
 
 
     ResponseCalificacionPlatilloDTO toResponseCalificacionPlatilloDto(CalificacionRestaurante calificacionRestaurante);
+    List<ResponseCalificacionPlatilloDTO> toListResponseCalificacionPlatilloDto(List<CalificacionRestaurante> calificacionRestaurante);
 }

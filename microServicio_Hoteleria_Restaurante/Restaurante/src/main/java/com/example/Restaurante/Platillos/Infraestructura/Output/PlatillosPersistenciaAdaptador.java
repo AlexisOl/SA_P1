@@ -1,9 +1,9 @@
 package com.example.Restaurante.Platillos.Infraestructura.Output;
 
 
-import com.example.Restaurante.Platillos.Aplicacion.Ports.Input.ListarPlatilloEspecificoInputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.CrearPlatilloOutputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.ListarPlatilloEspecificoOutputPort;
+import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.ListarPlatillosGlobalesOutputPort;
 import com.example.Restaurante.Platillos.Aplicacion.Ports.Output.ListarPlatillosOutputPort;
 import com.example.Restaurante.Platillos.Dominio.Platillos;
 import com.example.Restaurante.Platillos.Infraestructura.Output.Mapper.PlatillosMapper;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 
 public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort, ListarPlatilloEspecificoOutputPort ,
-        ListarPlatillosOutputPort {
+        ListarPlatillosOutputPort, ListarPlatillosGlobalesOutputPort {
     private PlatillosMapper platillosMapper;
     private PlatillosRepository platillosRepository;
 
@@ -34,18 +34,26 @@ public class PlatillosPersistenciaAdaptador implements CrearPlatilloOutputPort, 
     }
 
     @Override
-    public Optional<Platillos> listarPlatillos(UUID id) {
-        return Optional.ofNullable(
+    public Platillos listarPlatillosEspecificos(UUID id) {
+        return
                 this.platillosMapper.toPlatillos(
                         this.platillosRepository.findById(id).get()
-                )
         );
     }
 
     @Override
-    public List<Platillos> listarPlatillos() {
+    public List<Platillos> listarPlatillos(UUID id) {
+
+        System.out.println(this.platillosRepository.buscarPlatillosPorRestaurante(id));
         return (this.platillosMapper.toListPlatillos(
-                this.platillosRepository.findAll()
+                this.platillosRepository.buscarPlatillosPorRestaurante(id)
         ));
+    }
+
+    @Override
+    public List<Platillos> listarPlatillosGlobales() {
+        return this.platillosMapper.toListPlatillos(
+                this.platillosRepository.findAll()
+        );
     }
 }
