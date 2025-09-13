@@ -7,7 +7,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 
-@EnableFeignClients(basePackages = {"com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Feigns", "com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns"})
+@EnableFeignClients(basePackages = {"com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Feigns",
+        "com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns",
+        "com.example.facturacion.Factura_Restaurante.Infraestructura.Feigns"})
 @SpringBootApplication
 public class FacturacionApplication {
 

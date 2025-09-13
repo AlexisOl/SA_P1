@@ -1,32 +1,29 @@
-package com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Service.GenerarGanancias;
-
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Input.GanaciasHistoricasInputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Input.GenerarGananciasInputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.GananciasHistorciasOutputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Aplicacion.Ports.Output.GenerarGananciasOutputPort;
-import com.example.facturacion.DetalleFactura_Hotel.Dominio.ObjetosDeValor.Ganancias;
-import com.example.facturacion.DetalleFactura_Hotel.Infraestructura.Feigns.UsuariosFeing;
+package com.example.facturacion.Factura_Restaurante.Aplicacion.Service.GenerarGananciasHistoricas;
+import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Input.GananciasHistoricasRestauranteInputPort;
+import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.GananciasHistoticasRestauranteOutputPort;
+import com.example.facturacion.Factura_Restaurante.Infraestructura.DTO.Ganancias;
+import com.example.facturacion.Factura_Restaurante.Infraestructura.Feigns.UsuariosFeignRestaurante;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
-public class CasoUsoGenerarGanancias implements GanaciasHistoricasInputPort {
+public class CasoUsoGenerarGanancias implements GananciasHistoricasRestauranteInputPort {
 
-    private final GenerarGananciasOutputPort generarGananciasOutputPort;
-    private final UsuariosFeing usuariosFeing;
+    private final GananciasHistoticasRestauranteOutputPort gananciasHistoticasRestauranteOutputPort;
+    private final UsuariosFeignRestaurante usuariosFeing;
 
 
-    public CasoUsoGenerarGanancias(GenerarGananciasOutputPort generarGananciasOutputPort,
-                                   UsuariosFeing usuariosFeing){
-        this.generarGananciasOutputPort = generarGananciasOutputPort;
+    public CasoUsoGenerarGanancias(GananciasHistoticasRestauranteOutputPort gananciasHistoticasRestauranteOutputPort,
+                                   UsuariosFeignRestaurante usuariosFeing){
+        this.gananciasHistoticasRestauranteOutputPort=gananciasHistoticasRestauranteOutputPort;
         this.usuariosFeing=usuariosFeing;
     }
+
     @Override
-    public List<Ganancias> gananciasHistoricas(Long id) {
+    public List<Ganancias> gananciasHistoricas(UUID id) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //generacion de pagos
         List<Ganancias> elementos = new ArrayList<>();
@@ -53,13 +50,13 @@ public class CasoUsoGenerarGanancias implements GanaciasHistoricasInputPort {
 
         // generacion de ganancias
         List<Ganancias> elementosGanancias = new ArrayList<>();
-        for (Object[] pagos: this.generarGananciasOutputPort.gananciasHistoricas(id) ){
+        for (Object[] pagos: this.gananciasHistoticasRestauranteOutputPort.gananciasHistoricas(id) ){
             elementosGanancias.add(new Ganancias(
                     (Integer) pagos[0],
                     (Integer) pagos[1],
                     (Double) pagos[2],
-            (Date) pagos[3],
-            (Date) pagos[4]
+                    (Date) pagos[3],
+                    (Date) pagos[4]
             ));
         }
 
