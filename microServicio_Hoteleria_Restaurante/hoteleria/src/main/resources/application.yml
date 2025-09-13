@@ -7,10 +7,10 @@ spring:
 
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://clase2-semi1.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/hoteleria_mcsv
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://hoteleria.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/hoteleria_mcsv
     username: admin
-    password: AgAzjSglkmJY6823uFCQ
+    password: password
   #datasource:
   #  driver-class-name: com.mysql.cj.jdbc.Driver
 
@@ -25,7 +25,7 @@ spring:
     hibernate:
       ddl-auto: update
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MariaDBDialect
 
 eureka:
   client:

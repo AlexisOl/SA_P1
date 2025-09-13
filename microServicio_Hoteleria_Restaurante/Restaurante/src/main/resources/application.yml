@@ -7,8 +7,8 @@ spring:
 
   datasource:
     #  driver-class-name: com.mysql.cj.jdbc.Driver
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://restaurante-mcsv.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/restaurante_mcsv
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://restaurante.cctockmoifnj.us-east-1.rds.amazonaws.com:3306/restaurante_mcsv
     username: admin
     password: password
 
@@ -18,7 +18,7 @@ spring:
     hibernate:
       ddl-auto: update
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MariaDBDialect
 
 eureka:
   client:
