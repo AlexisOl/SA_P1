@@ -1,4 +1,4 @@
-package com.example.Usuario.EmpleadoHotel.Dominio.ObjetosValor;
+package com.example.Usuario.EmpleadoRestaurante.Dominio.ObjetosValor;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +17,5 @@ public class FechaTrabajo {
         }
         this.fecha = fecha;
     }
-    public static FechaTrabajo fromDatabase(LocalDate fecha) {
-        FechaTrabajo f = new FechaTrabajo();
-        f.fecha = fecha; // sin validación
-        return f;
-    }
-    private FechaTrabajo() {}
 
-    public LocalDate getFecha() {
-        return fecha;
-    }
 }

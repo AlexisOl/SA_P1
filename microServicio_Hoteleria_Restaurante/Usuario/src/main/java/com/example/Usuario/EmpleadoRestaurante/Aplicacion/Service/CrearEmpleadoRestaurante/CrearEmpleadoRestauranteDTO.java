@@ -1,16 +1,15 @@
-package com.example.Usuario.EmpleadoHotel.Aplicacion.Service.CrearEmpleadoHotel;
+package com.example.Usuario.EmpleadoRestaurante.Aplicacion.Service.CrearEmpleadoRestaurante;
 
-import com.example.Usuario.EmpleadoHotel.Dominio.ObjetosValor.FechaTrabajo;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Value
-public class CrearEmpleadoDTO {
-
+public class CrearEmpleadoRestauranteDTO {
     @NotNull
     private Long cui;
     @NotBlank
@@ -24,18 +23,13 @@ public class CrearEmpleadoDTO {
     @Email
     private String correo;
     @NotNull
-
-    private Long idhotel;
+    private UUID restauranteId;
     @NotNull
-
     private Double salario;
     @NotNull
-
     private LocalDate fecha;
-
     @NotBlank
     private String username;
     @NotNull
     private String password;
-
 }

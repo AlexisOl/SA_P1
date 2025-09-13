@@ -6,6 +6,13 @@ import com.example.Usuario.EmpleadoHotel.Dominio.EmpleadoHotel;
 import com.example.Usuario.EmpleadoHotel.Dominio.ObjetosValor.FechaTrabajo;
 import com.example.Usuario.Persona.Aplicacion.Ports.output.creacionPersonaOutputPersistenciaPuerto;
 import com.example.Usuario.Persona.Dominio.Persona;
+import com.example.Usuario.clientes.Aplicacion.Ports.Input.CreacionUsuarioInputPort;
+import com.example.Usuario.clientes.Aplicacion.Ports.Output.CreacionUsuarioOutputPersitencePort;
+import com.example.Usuario.clientes.Aplicacion.Service.CrearUsuario.crearUsuarioDTO;
+import com.example.Usuario.clientes.Dominio.Model.TipoEmpleado;
+import com.example.Usuario.clientes.Dominio.Model.Usuario;
+import com.example.Usuario.clientes.infraestructura.Adapters.Output.Persistence.UsuarioPersistenceAdapter;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -14,36 +21,41 @@ import java.util.UUID;
 public class CasoUsoCrearEmpleado implements CrearEmpleadosHotelInputPort {
 
     private final CrearEmpleadosHotelOutputPort crearEmpleadosHotelOutputPort;
-    private final creacionPersonaOutputPersistenciaPuerto creacionPersonaOutputPersistenciaPuerto;
+    //creacion de usuario
+    private final CreacionUsuarioInputPort creacionUsuarioInputPort;
     //private final Buscar
 
 
     public CasoUsoCrearEmpleado(CrearEmpleadosHotelOutputPort crearEmpleadosHotelOutputPort,
-                                creacionPersonaOutputPersistenciaPuerto creacionPersonaOutputPersistenciaPuerto) {
+                                CreacionUsuarioInputPort creacionUsuarioInputPort) {
         this.crearEmpleadosHotelOutputPort =  crearEmpleadosHotelOutputPort;
-        this.creacionPersonaOutputPersistenciaPuerto = creacionPersonaOutputPersistenciaPuerto;
+        this.creacionUsuarioInputPort = creacionUsuarioInputPort;
     }
 
 
 
     @Override
+    @Transactional
     public EmpleadoHotel crearEmpleadosHotel(CrearEmpleadoDTO empleado) {
 
-        Persona persona = this.creacionPersonaOutputPersistenciaPuerto.creacionPersona(
-                new Persona(
-                        empleado.getCui(),
-                        empleado.getNombre(),
-                        empleado.getFechaNacimiento(),
-                        empleado.getDireccion(),
-                        empleado.getTelefono(),
-                        empleado.getCorreo()
-                )
+        Usuario usuario = this.creacionUsuarioInputPort.crearUsuario(
+            new crearUsuarioDTO(
+                  empleado.getUsername(),
+                  empleado.getPassword(),
+                  empleado.getCui(),
+                    empleado.getNombre(),
+                    empleado.getFechaNacimiento(),
+                    empleado.getDireccion(),
+                    empleado.getTelefono(),
+                    empleado.getCorreo(),
+                    "EMPLEADO"
+            )
         );
 
         return this.crearEmpleadosHotelOutputPort.crearEmpleadosHotel(
                new EmpleadoHotel(
                        UUID.randomUUID(),
-                       persona,
+                       usuario.getPersona(),
                        1L,
                        empleado.getSalario(),
                        new FechaTrabajo(empleado.getFecha())

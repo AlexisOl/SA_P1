@@ -14,7 +14,6 @@ import java.util.UUID;
 @Value
 @AllArgsConstructor
 public class crearUsuarioDTO {
-
     @NotBlank
     private String username;
     @NotNull
@@ -31,7 +30,8 @@ public class crearUsuarioDTO {
     private String telefono;
     @Email
     private String correo;
-
+    @NotNull
+    private String tipoUsuario;
 
 
 

@@ -10,10 +10,11 @@ import com.example.Usuario.clientes.Aplicacion.Ports.Input.CreacionUsuarioInputP
 import com.example.Usuario.clientes.Aplicacion.Ports.Output.CreacionUsuarioOutputPersitencePort;
 import com.example.Usuario.clientes.Dominio.Model.TipoEmpleado;
 import com.example.Usuario.clientes.Dominio.Model.Usuario;
+import com.example.Usuario.clientes.infraestructura.Adapters.Security.SecurityConfig;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ public class casoUsoCrearUsuario implements CreacionUsuarioInputPort {
     private final CreacionUsuarioOutputPersitencePort creacionUsuarioOutputPersitencePort;
     private final PersonaRepository personaRepository;
     private final PersonaPersistenceMapper personaPersistenceMapper;
+    private final SecurityConfig securityConfig;
 
     @Override
     @Transactional
@@ -41,12 +43,19 @@ public class casoUsoCrearUsuario implements CreacionUsuarioInputPort {
         );
 
        // PersonaEntity persona = personaRepository.save(personaPersistenceMapper.toPersonaEntity(nuevaPersona));
+        TipoEmpleado tipo = TipoEmpleado.valueOf("CLIENTE");
+        if(!usuarioDTO.getTipoUsuario().isEmpty()){
+            tipo =TipoEmpleado.valueOf("EMPLEADO");
+
+        }
+        //encriptar
+
             Usuario nuevoUsuario = creacionUsuarioOutputPersitencePort.crearUsuario(
                     new Usuario(UUID.randomUUID(),
                             usuarioDTO.getUsername(),
-                            usuarioDTO.getPassword(),
+                            securityConfig.passwordEncoder().encode(usuarioDTO.getPassword()),
                             personaPersistenceMapper.toPersona(personaPersistenceMapper.toPersonaEntity(nuevaPersona)),
-                    TipoEmpleado.CLIENTE
+                            tipo
                     ));
             return nuevoUsuario;
         }
