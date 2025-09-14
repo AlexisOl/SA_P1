@@ -60,18 +60,15 @@ public class CasoUsoGenerarFacturaDetallada implements GenerarFacturaDetalladaIn
         if (promocion!=null){
             precioFinal-=nuevaCantidad.getPrecio()*promocion.getCantidad_descuento()/100;
         }
-
+        System.out.println("promocion"+ precioFinal);
 
         DetalleFactura_Hotel detalleFinal = this.generarFacturaDetalladaOutputPort.GenerarFacturaDetallada(
                 new DetalleFactura_Hotel(
                         UUID.randomUUID(),
                         LocalDate.now(),
                         detalleFactura_Hotel.getId_reservacion(),
-                        new precioPorFacturaHotel(reservacionDeterminada.getHabitacion().getPrecio(), reservacionDeterminada.getFechaEntrada(), reservacionDeterminada.getFechaSalida())
+                        new precioPorFacturaHotel(precioFinal)
                 ));
-
-
-        detalleFinal.setPrecio(new precioPorFacturaHotel(precioFinal));
 
 
         // comprobar fechas
