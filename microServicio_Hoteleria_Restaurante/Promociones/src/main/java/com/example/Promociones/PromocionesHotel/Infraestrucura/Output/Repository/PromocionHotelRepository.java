@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PromocionHotelRepository extends JpaRepository<PromocionHotelEntity, UUID> {
@@ -22,5 +24,15 @@ public interface PromocionHotelRepository extends JpaRepository<PromocionHotelEn
     boolean existsOverlappingPromotion(@Param("habitacion") UUID habitacion,
                                        @Param("fechaInicio") LocalDate fechaInicio,
                                        @Param("fechaFinal") LocalDate fechaFinal);
+
+    List<PromocionHotelEntity> findAllByHabitacionIn(List<UUID> habitacionIds);
+    PromocionHotelEntity findAllByHabitacionAndFechaFinalBeforeAndFechaInicioBefore(UUID habitacion, LocalDate fechaFinalBefore, LocalDate fechaInicioBefore);
+
+
+    PromocionHotelEntity findByHabitacionAndFechaInicioLessThanEqualAndFechaFinalGreaterThanEqual(
+            UUID habitacionId,
+            LocalDate fechaInicio,
+            LocalDate fechaFinal
+    );
 
 }

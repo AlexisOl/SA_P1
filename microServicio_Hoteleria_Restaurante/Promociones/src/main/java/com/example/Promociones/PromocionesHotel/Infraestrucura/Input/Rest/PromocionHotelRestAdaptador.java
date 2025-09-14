@@ -1,6 +1,9 @@
 package com.example.Promociones.PromocionesHotel.Infraestrucura.Input.Rest;
 
 import com.example.Promociones.PromocionesHotel.Aplicacion.Ports.Input.CrearPromocionHotelInputPort;
+import com.example.Promociones.PromocionesHotel.Aplicacion.Ports.Input.LIstarPromocionesActualesHotelInputPort;
+import com.example.Promociones.PromocionesHotel.Aplicacion.Ports.Input.ListarPromocionEspecificaInputPort;
+import com.example.Promociones.PromocionesHotel.Aplicacion.Ports.Input.ListarPromocionesInputPort;
 import com.example.Promociones.PromocionesHotel.Aplicacion.Service.CrearPromocionHotel.CrearPromocionDTO;
 import com.example.Promociones.PromocionesHotel.Infraestrucura.Input.Rest.MapperRest.PromocionHotelRestMapper;
 import com.example.Promociones.PromocionesHotel.Infraestrucura.Input.Rest.Model.Response.ResponsePromocionHotelDTO;
@@ -20,6 +23,9 @@ public class PromocionHotelRestAdaptador {
 
     private final CrearPromocionHotelInputPort crearPromocionHotelInputPort;
     private final PromocionHotelRestMapper promocionHotelRestMapper;
+    private final ListarPromocionesInputPort listarPromocionesInputPort;
+    private final LIstarPromocionesActualesHotelInputPort lIstarPromocionesActualesHotelInputPort;
+    private final ListarPromocionEspecificaInputPort listarPromocionEspecificaInputPort;
 
 
 //    @GetMapping("{hotel_id}")
@@ -38,11 +44,27 @@ public class PromocionHotelRestAdaptador {
                 ));
     }
 
+    @GetMapping("/hotel/{habitacionId}")
+    public List<ResponsePromocionHotelDTO> obtenerPromocionesPorHotel(@PathVariable Long habitacionId ) {
+        return this.promocionHotelRestMapper.toResponsePromocionHotelDtoList(
+                listarPromocionesInputPort.listarPromocionesHotel(habitacionId)
 
-//    @GetMapping("/habitacion/{habitacion_id}")
-//    public BuscarHabitacionResponseDTO obtenerHabitacion(@Valid @PathVariable UUID habitacion_id) {
-//        Habitacion prueba = this.buscarHabitacionInputPort.buscarHabitacion(habitacion_id);
-//        System.out.println(prueba.getId()+" - "+prueba.getPrecio()+ "-- "+ prueba.getTipoHabitacion());
-//        return  this.creacionHabitacionRestMapper.toBuscarHabitacionResponse(this.buscarHabitacionInputPort.buscarHabitacion(habitacion_id));
-//    }
+        );
+    }
+
+
+    @GetMapping("/actualEspecifica/{habitacion_id}")
+    public ResponsePromocionHotelDTO onbtenerPromocionActual(@Valid @PathVariable UUID habitacion_id) {
+        return this.promocionHotelRestMapper.toResponsePromocionHotelDto(
+                lIstarPromocionesActualesHotelInputPort.listarPromocionesHotel(habitacion_id)
+
+        );
+    }
+    @GetMapping("/{id}")
+    public ResponsePromocionHotelDTO onbtenerPromocionEspecifica(@Valid @PathVariable UUID id) {
+        return this.promocionHotelRestMapper.toResponsePromocionHotelDto(
+                listarPromocionEspecificaInputPort.ListarPromocionEspecifica(id)
+
+        );
+    }
 }
