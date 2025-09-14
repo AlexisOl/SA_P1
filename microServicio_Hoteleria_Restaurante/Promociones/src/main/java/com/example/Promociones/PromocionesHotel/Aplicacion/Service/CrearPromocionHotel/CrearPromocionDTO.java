@@ -1,15 +1,12 @@
-package com.example.Promociones.PromocionesHotel.Dominio;
+package com.example.Promociones.PromocionesHotel.Aplicacion.Service.CrearPromocionHotel;
 
-import lombok.Getter;
 import lombok.Value;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Getter
 @Value
-public class PromocionesHotel {
-    private UUID id;
+public class CrearPromocionDTO {
     private int cantidad_descuento;
     private LocalDate fecha_inicio;
     private LocalDate fecha_final;
