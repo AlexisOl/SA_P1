@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
-@FeignClient(name ="mcsv-hoteleria", url = "http://localhost:8085")
+@FeignClient(name ="mcsv-hoteleria", url = "http://localhost:8081")
 
 public interface HoteleriaFeign {
 
-    @GetMapping("/habitacion/{habitacion_id}")
+    @GetMapping("/habitaciones/habitacion/{habitacion_id}")
     public BuscarHabitacionResponseDTO obtenerHabitacion(@Valid @PathVariable UUID habitacion_id);
 
 }

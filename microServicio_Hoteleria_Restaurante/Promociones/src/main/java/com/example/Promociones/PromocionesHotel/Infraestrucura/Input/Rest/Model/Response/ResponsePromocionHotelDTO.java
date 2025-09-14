@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ResponsePromocionHotelDTO {
     private UUID id;
     private int cantidad_descuento;
-    private LocalDate fecha_inicio;
-    private LocalDate fecha_final;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
     private UUID habitacion;
 }

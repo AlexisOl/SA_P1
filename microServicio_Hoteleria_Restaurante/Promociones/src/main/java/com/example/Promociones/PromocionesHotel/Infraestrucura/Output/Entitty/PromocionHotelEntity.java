@@ -25,9 +25,9 @@ public class PromocionHotelEntity {
     @Column(nullable = false)
     private int cantidad_descuento;
     @Column(nullable = false)
-    private LocalDate fecha_inicio;
+    private LocalDate fechaInicio;
     @Column(nullable = false)
-    private LocalDate fecha_final;
+    private LocalDate fechaFinal;
     @Column(nullable = false)
     private UUID habitacion;
 }

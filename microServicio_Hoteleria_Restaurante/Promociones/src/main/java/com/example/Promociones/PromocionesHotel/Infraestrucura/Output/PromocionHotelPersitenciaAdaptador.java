@@ -28,6 +28,6 @@ public class PromocionHotelPersitenciaAdaptador implements CrearPromocionHotelOu
 
     @Override
     public boolean existePromocionHabitacionFecha(UUID habiacion, LocalDate fechaInicio, LocalDate fechaFinal) {
-        return this.promocionHotelRepository.existsByHabitacionAndFecha_inicioLessThanEqualAndFecha_finalGreaterThanEqual( habiacion, fechaInicio,fechaFinal);
+        return this.promocionHotelRepository.existsOverlappingPromotion( habiacion, fechaInicio,fechaFinal);
     }
 }
