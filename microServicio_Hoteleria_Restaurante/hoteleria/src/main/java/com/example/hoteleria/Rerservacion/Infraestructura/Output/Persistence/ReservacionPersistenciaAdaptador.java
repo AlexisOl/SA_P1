@@ -1,9 +1,6 @@
 package com.example.hoteleria.Rerservacion.Infraestructura.Output.Persistence;
 
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.CrearReservacionOutputPort;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.ExistenciaHabitacionesEnEsperaId;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.ListarReservacionEspecificaOutput;
-import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.ListarReservacionesUsuarioOutputPort;
+import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.*;
 import com.example.hoteleria.Rerservacion.Dominio.Reservacion;
 import com.example.hoteleria.Rerservacion.Dominio.TipoReservacion;
 import com.example.hoteleria.Rerservacion.Infraestructura.Output.Persistence.Mapper.ReservacionMapper;
@@ -19,7 +16,9 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputPort, ExistenciaHabitacionesEnEsperaId,
-        ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput {
+        ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput, ListarReservacionesHotelOutputPort,
+        CambiarEstadoReservacionOutputPort, ListarResrevacionesPorHabitacionEspecificaOutputPort,
+IDHabitacionConMasReservacionesOutputPort{
 
     private final ReservacionMapper reservacionMapper;
     private final ReservacionRepository reservacionRepository;
@@ -50,7 +49,34 @@ public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputP
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Reservacion ListarReservacionEspecifica(UUID id) {
         return this.reservacionMapper.toReservacion(this.reservacionRepository.findById(id).get());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Reservacion> listarReservacionesHotel(Long id) {
+        System.out.println(reservacionRepository.findAllByHabitacion_Hotel_Id((id)).get(1).getTipoReservacion());
+        return   this.reservacionMapper.toReservacionList(reservacionRepository.findAllByHabitacion_Hotel_Id((id))) ;
+    }
+
+    @Override
+    public Reservacion cambiarEstadoReservacion(Reservacion reservacion) {
+        return this.reservacionMapper.toReservacion(
+                this.reservacionRepository.save(reservacionMapper.toReservacionEntity(reservacion))
+        );
+    }
+
+    @Override
+    public List<Reservacion> ListarRersvacionesHabitacionesEspecifca(UUID id) {
+        return this.reservacionMapper.toReservacionList(
+                this.reservacionRepository.findAllByHabitacion_Id((id)
+        ));
+    }
+
+    @Override
+    public UUID obtenerHabitacionConMasAlojamientos() {
+        return this.reservacionRepository.habitacionConMasAlojamientos();
     }
 }

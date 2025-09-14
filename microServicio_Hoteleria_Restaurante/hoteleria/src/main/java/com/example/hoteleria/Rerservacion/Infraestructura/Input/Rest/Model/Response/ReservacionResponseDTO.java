@@ -1,6 +1,7 @@
 package com.example.hoteleria.Rerservacion.Infraestructura.Input.Rest.Model.Response;
 
 import com.example.hoteleria.Habitaciones.Dominio.Model.Habitacion;
+import com.example.hoteleria.Rerservacion.Dominio.TipoReservacion;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -16,4 +17,5 @@ public class ReservacionResponseDTO {
     private LocalDate fechaSalida;
     private Habitacion habitacion;
     private UUID idusuario;
+    private TipoReservacion tipoReservacion;
 }

@@ -5,6 +5,7 @@ import com.example.hoteleria.Habitaciones.Infraestructura.Adapters.Output.Persis
 import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Input.CrearReservacionInputPort;
 import com.example.hoteleria.Rerservacion.Aplicacion.Ports.Output.CrearReservacionOutputPort;
 import com.example.hoteleria.Rerservacion.Dominio.Reservacion;
+import com.example.hoteleria.Rerservacion.Dominio.TipoReservacion;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class CrearReservacion implements CrearReservacionInputPort {
                 crearReservacionDTO.getFechaSalida(),
                 habitacionEncontrada,
                 crearReservacionDTO.getIdusuario(),
-                        crearReservacionDTO.getTipoReservacion()
+                        TipoReservacion.valueOf(crearReservacionDTO.getTipoReservacion())
                 )
         );
         return nuevaReservacion;

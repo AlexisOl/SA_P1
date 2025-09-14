@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mcsv-facturacion:
+    image: mcsv-facturacion
+    build:
+      context: ../
+      dockerfile: ./config-dev-docker/Dockerfile
+    container_name: mcsv-facturacion
+    restart: always
+    environment:
+      #- SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=8083
+    ports:
+      - "8083:8083"
+    expose:
+      - 8083
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.4"

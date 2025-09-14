@@ -18,7 +18,7 @@ public class ListarPlatillos implements ListarPlatillosInputPort {
         this.listarPlatillosOutputPort =  listarPlatillosOutputPort;
     }
     @Override
-    public List<Platillos> listarPlatillos() {
-        return this.listarPlatillosOutputPort.listarPlatillos();
+    public List<Platillos> listarPlatillos(UUID id) {
+        return this.listarPlatillosOutputPort.listarPlatillos(id);
     }
 }
