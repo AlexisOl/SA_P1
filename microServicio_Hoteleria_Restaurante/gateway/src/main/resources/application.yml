@@ -75,3 +75,11 @@ spring:
           predicates:
             - Path=/facturaRestaurante/**
 
+        - id: promocion-restaurante-dev
+          uri: http://44.223.54.192:8084
+          predicates:
+            - Path=/promocionRestaurante/**
+        - id: promocion-hotel-dev
+          uri: http://44.223.54.192:8084
+          predicates:
+            - Path=/promocionHotel/**
