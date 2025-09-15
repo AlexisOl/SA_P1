@@ -11,11 +11,18 @@ public class FechaTrabajo {
     private LocalDate fecha;
 
 
+
     public FechaTrabajo(LocalDate fecha) {
-        if (fecha == null || fecha.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("La fecha no puede ser anterior a hoy");
+        if (fecha == null ) {
+            throw new IllegalArgumentException("La fecha no puede ser nula");
         }
         this.fecha = fecha;
     }
+    public static FechaTrabajo fromDatabase(LocalDate fecha) {
+       FechaTrabajo f = new FechaTrabajo();
+        f.fecha = fecha; // sin validación
+        return f;
+    }
+    private FechaTrabajo() {}
 
 }
