@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ReservacionPersistenciaAdaptador implements CrearReservacionOutputPort, ExistenciaHabitacionesEnEsperaId,
         ListarReservacionesUsuarioOutputPort, ListarReservacionEspecificaOutput, ListarReservacionesHotelOutputPort,
-        CambiarEstadoReservacionOutputPort, ListarResrevacionesPorHabitacionEspecificaOutputPort,
+        CambiarEstadoReservacionOutputPort, ListarResrevacionesPorHabitacionEspecificaOutputPort,hayTraslapeOutputPort,
 IDHabitacionConMasReservacionesOutputPort{
 
     private final ReservacionMapper reservacionMapper;
@@ -78,5 +79,10 @@ IDHabitacionConMasReservacionesOutputPort{
     @Override
     public UUID obtenerHabitacionConMasAlojamientos() {
         return this.reservacionRepository.habitacionConMasAlojamientos();
+    }
+
+    @Override
+    public boolean existeTraslape(UUID habitacion, LocalDate fechaInicio, LocalDate fechaFinal) {
+        return this.reservacionRepository.existsOverlappingPromotion(habitacion, fechaInicio, fechaFinal);
     }
 }
