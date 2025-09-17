@@ -14,6 +14,4 @@ public interface HotelPersistenciaPuerto {
     Hotel save(Hotel hotel);
 
 
-    @Transactional(readOnly = true)
-    Optional<Hotel> buscarHotelId(Long idHotel);
 }

@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mcsv-promociones:
+    image: mcsv-promociones
+    build:
+      context: ../
+      dockerfile: ./config-dev-docker/Dockerfile
+    container_name: mcsv-promociones
+    restart: always
+    environment:
+      #- SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=8084
+    ports:
+      - "8084:8084"
+    expose:
+      - 8084
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.4"
