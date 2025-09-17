@@ -19,8 +19,10 @@ public class precioPorFacturaHotel {
         this.precio = precioHabitacion * noches;
     }
 
-
-    public precioPorFacturaHotel(double precio) {
-        this.precio = precio;
+    public precioPorFacturaHotel(double precioHabitacion) {
+        this.precio = precioHabitacion;
     }
+
+
+
 }
