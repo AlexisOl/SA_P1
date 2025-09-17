@@ -4,7 +4,9 @@ import com.example.hoteleria.Rerservacion.Dominio.TipoReservacion;
 import com.example.hoteleria.Rerservacion.Infraestructura.Output.Persistence.Entity.ReservacionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,5 +34,21 @@ public interface ReservacionRepository extends JpaRepository<ReservacionEntity, 
     LIMIT  1
 """)
      UUID  habitacionConMasAlojamientos();
+
+
+
+    @Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END " +
+            "FROM ReservacionEntity p " +
+            "WHERE p.habitacion.id = :habitacion " +
+            "AND (" +
+            "   (:fechaInicio BETWEEN p.fechaEntrada AND p.fechaSalida) OR " +
+            "   (:fechaFinal BETWEEN p.fechaEntrada AND p.fechaSalida) OR " +
+            "   (p.fechaEntrada BETWEEN :fechaInicio AND :fechaFinal) OR " +
+            "   (p.fechaSalida BETWEEN :fechaInicio AND :fechaFinal)" +
+            ")")
+    boolean existsOverlappingPromotion(@Param("habitacion") UUID habitacion,
+                                       @Param("fechaInicio") LocalDate fechaInicio,
+                                       @Param("fechaFinal") LocalDate fechaFinal);
+
 
 }
