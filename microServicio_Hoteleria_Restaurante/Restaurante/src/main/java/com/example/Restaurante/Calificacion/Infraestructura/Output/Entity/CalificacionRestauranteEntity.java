@@ -21,9 +21,9 @@ public class CalificacionRestauranteEntity {
     @Id
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String comentario;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double puntuacion;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idplatillos", nullable = false)
