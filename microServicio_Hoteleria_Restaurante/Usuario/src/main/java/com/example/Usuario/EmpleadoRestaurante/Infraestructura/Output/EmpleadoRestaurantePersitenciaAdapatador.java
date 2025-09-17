@@ -1,9 +1,6 @@
 package com.example.Usuario.EmpleadoRestaurante.Infraestructura.Output;
 
-import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.CrearEmpleadoRestauranteOutputPort;
-import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.EmpleadoRestaurantePorCuiOutputPort;
-import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.GeneracionPagosRestauranteOutputPort;
-import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.ListarEmpleadosRestaurantePorRestauranteOutPutPort;
+import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Output.*;
 import com.example.Usuario.EmpleadoRestaurante.Dominio.EmpleadoRestaurante;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Output.Entity.EmpleadoRestauranteEntity;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Output.Mapper.EmpleadoRestauranteMapper;
@@ -19,7 +16,7 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class EmpleadoRestaurantePersitenciaAdapatador implements CrearEmpleadoRestauranteOutputPort, ListarEmpleadosRestaurantePorRestauranteOutPutPort,
-        EmpleadoRestaurantePorCuiOutputPort , GeneracionPagosRestauranteOutputPort {
+        EmpleadoRestaurantePorCuiOutputPort , GeneracionPagosRestauranteOutputPort, ReporteDetalladoEmpleadoRestauranteOutputPort {
     private final EmpleadoRestauranteMapper empleadoRestauranteMapper;
     private final EmpleadoRestauranteRepository empleadoRestauranteRepository;
 
@@ -52,5 +49,10 @@ public class EmpleadoRestaurantePersitenciaAdapatador implements CrearEmpleadoRe
     public List<Object> perdidasPagosRestaurante(UUID id) {
         return this.empleadoRestauranteRepository.estimarPerdidaPagosEmpleado(id);
 
+    }
+
+    @Override
+    public List<Object> detalleEmpleadoRestauranteReporteDTO(UUID id) {
+        return this.empleadoRestauranteRepository.estimarPagosEmpleadoEspecifico(id);
     }
 }

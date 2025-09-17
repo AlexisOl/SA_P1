@@ -9,6 +9,7 @@ import com.example.Usuario.EmpleadoHotel.Infraestructura.Input.Rest.Model.Output
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Input.CrearEmpleadosRestauranteInputPort;
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Input.GeneracionPagosRestauranteInputPort;
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Input.ListarEmpleadosRestauranteHotelInputPort;
+import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Ports.Input.ReporteDetalladoEmpleadoRestauranteInputPort;
 import com.example.Usuario.EmpleadoRestaurante.Aplicacion.Service.CrearEmpleadoRestaurante.CrearEmpleadoRestauranteDTO;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Input.Rest.Mapper.EmpleadoRestauranteRestMapper;
 import com.example.Usuario.EmpleadoRestaurante.Infraestructura.Input.Rest.Model.Output.ResponseEmpleadoRestauranteDTO;
@@ -31,6 +32,7 @@ public class EmpleadoRestauranteRestAdaptador {
     private final EmpleadoRestauranteRestMapper empleadoRestauranteMapper;
     private final ListarEmpleadosRestauranteHotelInputPort listarEmpleadosRestauranteHotelInputPort;
     private final GeneracionPagosRestauranteInputPort generacionPagosRestauranteInputPort;
+    private final ReporteDetalladoEmpleadoRestauranteInputPort reporteDetalladoEmpleadoRestauranteInputPort;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -51,6 +53,12 @@ public class EmpleadoRestauranteRestAdaptador {
     @GetMapping("/pagos/{id}")
     public List<Object> pruebaPerdidas(@PathVariable UUID id) {
         return (this.generacionPagosRestauranteInputPort.perdidasPagosRestaurante(id)) ;
+    }
+
+
+    @GetMapping("/reportePagosUsuario/{id}")
+    public List<Object> reportePagosEmpleadoRestaurante(@PathVariable UUID id) {
+        return (this.reporteDetalladoEmpleadoRestauranteInputPort.detalleEmpleadoRestauranteReporteDTO(id)) ;
     }
 
 }

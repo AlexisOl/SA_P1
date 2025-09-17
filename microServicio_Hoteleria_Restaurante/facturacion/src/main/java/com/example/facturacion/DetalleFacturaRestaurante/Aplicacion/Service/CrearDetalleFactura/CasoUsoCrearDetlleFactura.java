@@ -4,6 +4,8 @@ import com.example.facturacion.DetalleFacturaRestaurante.Aplicacion.Ports.Input.
 import com.example.facturacion.DetalleFacturaRestaurante.Aplicacion.Ports.Output.CrearDetlleFacturaOutputPort;
 import com.example.facturacion.DetalleFacturaRestaurante.Dominio.DetalleFacturaRestaurante;
 import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns.DTO.PlatillosResponseDTO;
+import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns.DTO.PromocionRestauranteDTO;
+import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns.PromocionRestauranteFeing;
 import com.example.facturacion.DetalleFacturaRestaurante.Infraestructura.Feigns.RestauranteFeign;
 import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.ActualizarFactura;
 import com.example.facturacion.Factura_Restaurante.Aplicacion.Ports.Output.CrearFacturaRestauranteOutputPort;
@@ -21,15 +23,18 @@ public class CasoUsoCrearDetlleFactura implements CrearDetlleFacturaInputPort {
     private final CrearFacturaRestauranteOutputPort crearFacturaRestauranteOutputPort;
     private final RestauranteFeign restauranteFeign;
     private final ActualizarFactura actualizarFactura;
+    private final PromocionRestauranteFeing promocionRestauranteFeing;
 
     public CasoUsoCrearDetlleFactura(CrearDetlleFacturaOutputPort crearDetlleFacturaOutputPort,
                                      RestauranteFeign restauranteFeign,
                                      CrearFacturaRestauranteOutputPort crearFacturaRestauranteOutputPort,
-                                     ActualizarFactura actualizarFactura) {
+                                     ActualizarFactura actualizarFactura,
+                                     PromocionRestauranteFeing promocionRestauranteFeing) {
         this.crearDetlleFacturaOutputPort = crearDetlleFacturaOutputPort;
         this.restauranteFeign = restauranteFeign;
         this.crearFacturaRestauranteOutputPort = crearFacturaRestauranteOutputPort;
         this.actualizarFactura=actualizarFactura;
+        this.promocionRestauranteFeing=promocionRestauranteFeing;
     }
     @Override
     public DetalleFacturaRestaurante createDetalleFacturaRestaurante(CrearDetlleFacturaDTO detlleFacturaDTO) {
@@ -65,12 +70,19 @@ public class CasoUsoCrearDetlleFactura implements CrearDetlleFacturaInputPort {
 
             System.out.println("Platillo: " + platillo.getNombre() + " - Cantidad: " + cantidad);
 
+            Double precioParcial = platillosEspecifico.getValue()*platillosEspecifico.getKey().getPrecio();
+            PromocionRestauranteDTO Descuento = this.promocionRestauranteFeing.onbtenerPromocionActual(platillosEspecifico.getKey().getId());
+
+            if (Descuento!=null){
+                precioParcial -= platillosEspecifico.getValue()*platillosEspecifico.getKey().getPrecio()*Descuento.getCantidad_descuento()/100;
+            }
+
             this.crearDetlleFacturaOutputPort.createDetalleFacturaRestaurante(
                     new DetalleFacturaRestaurante(
                             UUID.randomUUID(),
                             platillosEspecifico.getKey().getId(),
                             platillosEspecifico.getValue(),
-                            platillosEspecifico.getValue()*platillosEspecifico.getKey().getPrecio(),
+                            precioParcial,
                             nuevaFacturaRestaurante
                     )
             );

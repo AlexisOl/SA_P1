@@ -27,7 +27,7 @@ public class HotelRestAdapter {
     private final HotelServicioPuerto servicioPuerto;
     //private final BuscarTodoInputPort buscarTodoInputPort;
     //private final CrearHotelInputPort crearHotelInputPort;
-    //private final BuscarPorIdInputPort  buscarPorIdInputPort;
+    private final BuscarPorIdInputPort  buscarPorIdInputPort;
 
 
     @GetMapping()
@@ -37,7 +37,7 @@ public class HotelRestAdapter {
 
     @GetMapping("{id}")
     public HotelResponse findByIdHotel(@PathVariable Long id) {
-        return  this.restMapper.toHotelResponseMapper(this.servicioPuerto.buscarPorId(id));
+        return  this.restMapper.toHotelResponseMapper(this.buscarPorIdInputPort.buscarPorId(id));
     }
 
     @PostMapping()

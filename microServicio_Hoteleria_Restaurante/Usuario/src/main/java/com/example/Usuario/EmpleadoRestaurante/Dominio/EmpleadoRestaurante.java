@@ -26,4 +26,5 @@ public class EmpleadoRestaurante {
         this.fecha = fecha;
         this.estado = true;
     }
+
 }
